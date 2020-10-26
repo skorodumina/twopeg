@@ -1,0 +1,258 @@
+
+
+//----------------------------------------------------
+//WE ASSUMED THAT IN REACTION A + B = 1 + 2 + 3
+//A - VIRTUAL PHOTON
+//B - INITIAL PROTON
+//1 - FINAL PROTON
+//2 - PI+
+//3 - PI-
+
+
+
+ TLorentzVector P4_EL_ini,P4_gamma_ini, P4_P_ini, P4_EL_fin, P4_PIp_fin, P4_PIm_fin, P4_P_fin;
+ TLorentzVector  P4_PIp_fin_1, P4_PIm_fin_1, P4_P_fin_1;
+ Float_t E_gamma;
+//  Float_t P4_PIp_fin_mag, P4_PIm_fin_mag, P4_P_fin_mag;
+//  Float_t theta_P_fin, theta_PIp_fin, theta_PIm_fin,phi_P_fin, phi_PIp_fin, phi_PIm_fin;
+  Float_t theta_gamma_1,phi_gamma_1,theta_el_1,phi_el_1;
+  Float_t UE1,VE1,WE1,UE2,VE2,WE2,UX,VX,WX,UY,VY,WY,UGV,VGV,WGV;
+  Float_t YY_MOD,XX_MOD;
+  Float_t  E_gamma_lab;
+  Float_t  M12,M23,M13; 
+  TVector3 P3_G,P3_EL,P3_Y,P3_X;
+ 
+ E_gamma = (W*W-Q2-m_proton*m_proton)/2./W;
+ 
+ //4-m0menta of initial particles
+P4_gamma_ini.SetXYZT(0,0,sqrt(E_gamma*E_gamma+Q2),E_gamma); 
+P4_P_ini.SetXYZT(0,0,-P4_gamma_ini[2],sqrt(m_proton*m_proton+P4_gamma_ini[2]*P4_gamma_ini[2]));
+
+//Energy and momentum of final particles
+
+M12 = inv_m_pip_p;
+M23 = inv_m_pip_pim;
+// One of the invariant masses should be derived from the other two
+M13 = sqrt(W*W+m_proton*m_proton+2.*m_pip*m_pip-M12*M12-M23*M23);
+//M13 = inv_m_pim_p;
+ 
+ P4_P_fin.SetXYZT(1.,1.,1.,(W*W+m_proton*m_proton-M23*M23)/2./W);
+ P4_PIp_fin.SetXYZT(1.,1.,1.,(W*W+m_pip*m_pip-M13*M13)/2./W);
+ P4_PIm_fin.SetXYZT(1.,1.,1.,(W*W+m_pip*m_pip-M12*M12)/2./W);
+ 
+ P4_P_fin.SetRho(sqrt(P4_P_fin[3]*P4_P_fin[3]-m_proton*m_proton));
+ P4_PIp_fin.SetRho(sqrt(P4_PIp_fin[3]*P4_PIp_fin[3]-m_pip*m_pip));
+ P4_PIm_fin.SetRho(sqrt(P4_PIm_fin[3]*P4_PIm_fin[3]-m_pip*m_pip));
+ 
+ 
+ 
+
+
+ //angles calculation in the system where Z-axes along 1 (final proton), X perp Z situated in a-b-1 (ph-ini p-fin p) plane
+ 
+ /*
+ theta_P_fin = 0.;
+ phi_P_fin = 0.;
+ 
+ theta_PIp_fin =  acos((m_proton*m_proton+m_pip*m_pip+2*P4_P_fin[3]*P4_PIp_fin[3]-M12*M12)/2./P4_P_fin.Vect().Mag()/P4_PIp_fin.Vect().Mag());
+ phi_PIp_fin = alpha_PIpPIm_pipf*M_PI/180.;
+ 
+ 
+ theta_PIm_fin =  acos((m_proton*m_proton+m_pip*m_pip+2*P4_P_fin[3]*P4_PIm_fin[3]-M13*M13)/2./P4_P_fin.Vect().Mag()/P4_PIm_fin.Vect().Mag());
+ phi_PIm_fin = alpha_PIpPIm_pipf*M_PI/180.+M_PI;
+ 
+ if (phi_PIm_fin > 2.*M_PI)  phi_PIm_fin =  phi_PIm_fin - 2.*M_PI;
+ */
+ //momenta componets in this system
+ 
+ P4_P_fin.SetTheta(0.);
+ P4_P_fin.SetPhi(0.);
+ P4_PIp_fin.SetTheta(acos((m_proton*m_proton+m_pip*m_pip+2*P4_P_fin[3]*P4_PIp_fin[3]-M12*M12)/2./P4_P_fin.Vect().Mag()/P4_PIp_fin.Vect().Mag()));
+ P4_PIp_fin.SetPhi(alpha_PIpPIm_pipf*M_PI/180.);
+ P4_PIm_fin.SetTheta(acos((m_proton*m_proton+m_pip*m_pip+2*P4_P_fin[3]*P4_PIm_fin[3]-M13*M13)/2./P4_P_fin.Vect().Mag()/P4_PIm_fin.Vect().Mag()));
+ 
+ if (alpha_PIpPIm_pipf*M_PI/180. > M_PI) P4_PIm_fin.SetPhi(alpha_PIpPIm_pipf*M_PI/180.- M_PI); 
+ if (alpha_PIpPIm_pipf*M_PI/180. <= M_PI) P4_PIm_fin.SetPhi(alpha_PIpPIm_pipf*M_PI/180.+ M_PI);
+/* P4_P_fin[0] = 0.;
+ P4_P_fin[1] = 0.;
+ P4_P_fin[2] = P4_P_fin.Vect().Mag();
+ 
+ P4_PIp_fin[0] = P4_PIp_fin.Mag()*sin(theta_PIp_fin)*cos(phi_PIp_fin);
+ P4_PIp_fin[1] = P4_PIp_fin.Mag()*sin(theta_PIp_fin)*sin(phi_PIp_fin);
+ P4_PIp_fin[2] = P4_PIp_fin.Mag()*cos(theta_PIp_fin);
+ 
+ P4_PIm_fin[0] = P4_PIm_fin.Mag()*sin(theta_PIm_fin)*cos(phi_PIm_fin);
+ P4_PIm_fin[1] = P4_PIm_fin.Mag()*sin(theta_PIm_fin)*sin(phi_PIm_fin);
+ P4_PIm_fin[2] = P4_PIm_fin.Mag()*cos(theta_PIm_fin);
+ */
+ 
+ //rotation to the system where z is along a (virt ph), but x is still in hadronic plane
+ 
+ 
+
+
+
+  P4_P_fin.RotateY(theta_P_cm*M_PI/180.);
+  P4_P_fin.RotateZ(phi_P_cm*M_PI/180.); 
+  P4_PIp_fin.RotateY(theta_P_cm*M_PI/180.);
+  P4_PIp_fin.RotateZ(phi_P_cm*M_PI/180.); 
+//  P4_PIm_fin.RotateY(theta_P_cm*M_PI/180.);
+//  P4_PIm_fin.RotateZ(phi_P_cm*M_PI/180.); 
+  P4_PIm_fin.SetVect(-1.*P4_P_fin.Vect()-P4_PIp_fin.Vect());
+
+ 
+/* P4_P_fin_1[0] = P4_P_fin[0]*cos(theta_P_cm*M_PI/180.) + P4_P_fin[2]*sin(theta_P_cm*M_PI/180.);
+ P4_P_fin_1[1] = P4_P_fin[1];
+ P4_P_fin_1[2] = -1.*P4_P_fin[0]*sin(theta_P_cm*M_PI/180.) + P4_P_fin[2]*cos(theta_P_cm*M_PI/180.);
+ P4_P_fin_1[3] = P4_P_fin[3];
+ 
+ P4_PIp_fin_1[0] = P4_PIp_fin[0]*cos(theta_P_cm*M_PI/180.) + P4_PIp_fin[2]*sin(theta_P_cm*M_PI/180.);
+ P4_PIp_fin_1[1] = P4_PIp_fin[1];
+ P4_PIp_fin_1[2] = -1.*P4_PIp_fin[0]*sin(theta_P_cm*M_PI/180.) + P4_PIp_fin[2]*cos(theta_P_cm*M_PI/180.);
+ P4_PIp_fin_1[3] = P4_PIp_fin[3]; 
+  
+ P4_PIm_fin_1[0] = -1.*P4_P_fin_1[0] - P4_PIp_fin_1[0];
+ P4_PIm_fin_1[1] = -1.*P4_P_fin_1[1] - P4_PIp_fin_1[1];
+ P4_PIm_fin_1[2] = -1.*P4_P_fin_1[2] - P4_PIp_fin_1[2]; 
+ P4_PIm_fin_1[3] = P4_PIm_fin[3]; 
+ */
+ 
+//Rotation of the x axes - to be in ee' plane (the system is the same that will be in the LAB frame after the boost)
+
+/*
+P4_P_fin[0] =  P4_P_fin_1[0]*cos(phi_P_cm*M_PI/180.) - P4_P_fin_1[1]*sin(phi_P_cm*M_PI/180.);
+P4_P_fin[1] =  P4_P_fin_1[0]*sin(phi_P_cm*M_PI/180.) + P4_P_fin_1[1]*cos(phi_P_cm*M_PI/180.);
+P4_P_fin[2] = P4_P_fin_1[2];
+P4_P_fin[3] = P4_P_fin_1[3];
+
+P4_PIp_fin[0] =  P4_PIp_fin_1[0]*cos(phi_P_cm*M_PI/180.) - P4_PIp_fin_1[1]*sin(phi_P_cm*M_PI/180.);
+P4_PIp_fin[1] =  P4_PIp_fin_1[0]*sin(phi_P_cm*M_PI/180.) + P4_PIp_fin_1[1]*cos(phi_P_cm*M_PI/180.);
+P4_PIp_fin[2] = P4_PIp_fin_1[2];
+P4_PIp_fin[3] = P4_PIp_fin_1[3];
+
+ P4_PIm_fin[0] = -1.*P4_P_fin[0] - P4_PIp_fin[0];
+ P4_PIm_fin[1] = -1.*P4_P_fin[1] - P4_PIp_fin[1];
+ P4_PIm_fin[2] = -1.*P4_P_fin[2] - P4_PIp_fin[2]; 
+ P4_PIm_fin[3] = P4_PIm_fin[3]; 
+
+*/ 
+ //Boost with -beta - it should be defined in final version of the subroutine
+ E_gamma_lab = (W*W+Q2-m_proton*m_proton)/2./m_proton; 
+
+P4_P_fin.Boost(0,0,sqrt(E_gamma_lab*E_gamma_lab+Q2)/(E_gamma_lab+m_proton));
+P4_PIp_fin.Boost(0,0,sqrt(E_gamma_lab*E_gamma_lab+Q2)/(E_gamma_lab+m_proton));
+P4_PIm_fin.Boost(0,0,sqrt(E_gamma_lab*E_gamma_lab+Q2)/(E_gamma_lab+m_proton)); 
+
+//theta_gamma_1 = acos(
+// phi_el_1 = ph_EL*M_PI/180.;
+
+// theta_el_1 = acos(1.-Q2/2.039/(2.039-E_gamma_lab)/2.);
+ //theta_el_1 = th_EL*M_PI/180.;
+ 
+ //UE1 = sin( theta_el_1)*cos(phi_el_1);
+ //VE1 = sin( theta_el_1)*sin(phi_el_1);
+ //WE1 = cos(theta_el_1);
+ P3_EL.SetXYZ(0.,0.,1.);
+ P3_EL.SetTheta(acos(1.-Q2/2.039/(2.039-E_gamma_lab)/2.));
+ P3_EL.SetPhi(ph_EL*M_PI/180.);
+ 
+
+// theta_gamma_1 = acos((Q2+2.*2.039*E_gamma_lab)/2./2.039/(sqrt(Q2+E_gamma_lab*E_gamma_lab)));
+// if (phi_el_1 < M_PI) phi_gamma_1 = phi_el_1+M_PI;
+// if (phi_el_1 > M_PI) phi_gamma_1 = phi_el_1-M_PI;
+ 
+ P3_G.SetXYZ(0.,0.,1.);
+ P3_G.SetTheta(acos((Q2+2.*2.039*E_gamma_lab)/2./2.039/(sqrt(Q2+E_gamma_lab*E_gamma_lab))));
+ if (ph_EL*M_PI/180. < M_PI) P3_G.SetPhi(ph_EL*M_PI/180.+ M_PI);
+ if (ph_EL*M_PI/180. >= M_PI) P3_G.SetPhi(ph_EL*M_PI/180.- M_PI);
+/* UE2 = sin(theta_el_1+theta_gamma_1);
+ VE2 = 0.;
+ WE2 = cos(theta_el_1+theta_gamma_1);
+ */
+ 
+ 
+// UGV = sin(theta_gamma_1)*cos(phi_gamma_1);
+// VGV = sin(theta_gamma_1)*sin(phi_gamma_1);
+// WGV = cos(theta_gamma_1);
+ 
+ P3_Y = (P3_G.Cross(P3_EL)).Unit();
+ 
+ P3_X = (P3_Y.Cross(P3_G)).Unit();
+ 
+/* UY = VGV*WE1-WGV*VE1;
+ VY = WGV*UE1-UGV*WE1;
+ WY = UGV*VE1-VGV*UE1;
+ 
+ YY_MOD = sqrt(UY*UY+VY*VY+WY*WY);
+ 
+ UY = UY/YY_MOD;
+ VY = VY/YY_MOD;
+ WY = WY/YY_MOD;
+ 
+ UX = VY*WGV-WY*VGV;
+ VX = WY*UGV-UY*WGV;
+ WX = UY*VGV-VY*UGV;
+ 
+ XX_MOD = sqrt(UX*UX+VX*VX+WX*WX);
+ 
+ UX = UX/XX_MOD;
+ VX = VX/XX_MOD;
+ WX = WX/XX_MOD;
+ */
+ 
+
+ TRotation vrot;
+// Float_t eulr_psi;
+
+// eulr_phi = acos(P3_Y[2]/sqrt(1.-P3_G[2]*P3_G[2]));
+// if (P3_X[2] < 0.) eulr_phi = 2.*M_PI - eulr_phi;
+// eulr_phi = atan2(P3_X[2],-1.*P3_Y[2]);
+ 
+// eulr_psi = acos(-1.*P3_G[1]/sqrt(1.-P3_G[2]*P3_G[2]));
+// if (P3_G[0] < 0.) eulr_psi = 2.*M_PI - eulr_psi; 
+ 
+// eulr_psi = atan2(P3_G[0],-1.*P3_G[1]);
+ 
+ vrot.SetXEulerAngles(atan2(P3_X[2],P3_Y[2]),acos(P3_G[2]),atan2(P3_G[0],-1.*P3_G[1]));
+
+ 
+/* P4_P_fin_1[0] = P4_P_fin[0]*P3_X[0]+P4_P_fin[1]*P3_Y[0]+P4_P_fin[2]*P3_G[0];
+ P4_P_fin_1[1] = P4_P_fin[0]*P3_X[1]+P4_P_fin[1]*P3_Y[1]+P4_P_fin[2]*P3_G[1];
+ P4_P_fin_1[2] = P4_P_fin[0]*P3_X[2]+P4_P_fin[1]*P3_Y[2]+P4_P_fin[2]*P3_G[2]; 
+ 
+ P4_P_fin[0] = P4_P_fin_1[0];
+ P4_P_fin[1] = P4_P_fin_1[1];
+ P4_P_fin[2] = P4_P_fin_1[2];
+
+ 
+ 
+ 
+ P4_PIp_fin_1[0] = P4_PIp_fin[0]*P3_X[0]+P4_PIp_fin[1]*P3_Y[0]+P4_PIp_fin[2]*P3_G[0];
+ P4_PIp_fin_1[1] = P4_PIp_fin[0]*P3_X[1]+P4_PIp_fin[1]*P3_Y[1]+P4_PIp_fin[2]*P3_G[1];
+ P4_PIp_fin_1[2] = P4_PIp_fin[0]*P3_X[2]+P4_PIp_fin[1]*P3_Y[2]+P4_PIp_fin[2]*P3_G[2]; 
+ 
+ P4_PIp_fin[0] = P4_PIp_fin_1[0];
+ P4_PIp_fin[1] = P4_PIp_fin_1[1];
+ P4_PIp_fin[2] = P4_PIp_fin_1[2];
+ 
+ P4_PIm_fin_1[0] = P4_PIm_fin[0]*P3_X[0]+P4_PIm_fin[1]*P3_Y[0]+P4_PIm_fin[2]*P3_G[0];
+ P4_PIm_fin_1[1] = P4_PIm_fin[0]*P3_X[1]+P4_PIm_fin[1]*P3_Y[1]+P4_PIm_fin[2]*P3_G[1];
+ P4_PIm_fin_1[2] = P4_PIm_fin[0]*P3_X[2]+P4_PIm_fin[1]*P3_Y[2]+P4_PIm_fin[2]*P3_G[2]; 
+ 
+ P4_PIm_fin[0] = P4_PIm_fin_1[0];
+ P4_PIm_fin[1] = P4_PIm_fin_1[1];
+ P4_PIm_fin[2] = P4_PIm_fin_1[2]; 
+ */ 
+ 
+ 
+ P4_P_fin.Transform(vrot);
+ P4_PIp_fin.Transform(vrot);
+ P4_PIm_fin.Transform(vrot); 
+
+/*  
+cout << P4_PIm_fin[0]  << " before0 = " << P4_tmp[0] << "\n";
+cout << P4_PIm_fin[1]  << " before1 = " << P4_tmp[1] << "\n"; 
+cout << P4_PIm_fin[2]  << " before2 = " << P4_tmp[2] << "\n";
+cout << P4_PIm_fin[3]  << " before3 = " << P4_tmp[3] << "\n"; 
+cout << "\n"; 
+*/
