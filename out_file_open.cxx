@@ -14,7 +14,7 @@
 #include <math.h>
  using namespace std;
 
-int out_file_open() {
+void out_file_open() {
 
 #ifdef BOS
 //I. Create BOS output if needed

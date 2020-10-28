@@ -16,72 +16,77 @@ using namespace std;
 //-------
 Short_t getWbin_GOL (Float_t W) {
 //return int(W*10000. - 1.4125*10000.)/250;
-if ((W>=1.6125)&&(W<=2.1375))  return int((W-1.6125)/0.025);
-if ((W>2.1375)&&(W<=2.5375))  return 21+int((W-2.1375)/0.05);
+Short_t bin;
+if ((W>=1.6125)&&(W<=2.1375))  bin = int((W-1.6125)/0.025);
+if ((W>2.1375)&&(W<=2.5375))  bin = 21+int((W-2.1375)/0.05);
 
 /*
 
-if ((W>=1.6125)&&(W<=1.6375)) return 0;
-if ((W>=1.6375)&&(W<=1.6625)) return 1;
-if ((W>=1.6625)&&(W<=1.6875)) return 2;
-if ((W>=1.6875)&&(W<=1.7125)) return 3;
+if ((W>=1.6125)&&(W<=1.6375)) bin = 0;
+if ((W>=1.6375)&&(W<=1.6625)) bin = 1;
+if ((W>=1.6625)&&(W<=1.6875)) bin = 2;
+if ((W>=1.6875)&&(W<=1.7125)) bin = 3;
 
-if ((W>=1.7125)&&(W<=1.7375)) return 4;
-if ((W>=1.7375)&&(W<=1.7625)) return 5;
-if ((W>=1.7625)&&(W<=1.7875)) return 6;
-if ((W>=1.7875)&&(W<=1.8125)) return 7;
+if ((W>=1.7125)&&(W<=1.7375)) bin = 4;
+if ((W>=1.7375)&&(W<=1.7625)) bin = 5;
+if ((W>=1.7625)&&(W<=1.7875)) bin = 6;
+if ((W>=1.7875)&&(W<=1.8125)) bin = 7;
 
-if ((W>=1.8125)&&(W<=1.8375)) return 8;
-if ((W>=1.8375)&&(W<=1.8625)) return 9;
-if ((W>=1.8625)&&(W<=1.8875)) return 10;
-if ((W>=1.8875)&&(W<=1.9125)) return 11;
+if ((W>=1.8125)&&(W<=1.8375)) bin = 8;
+if ((W>=1.8375)&&(W<=1.8625)) bin = 9;
+if ((W>=1.8625)&&(W<=1.8875)) bin = 10;
+if ((W>=1.8875)&&(W<=1.9125)) bin = 11;
 
-if ((W>=1.9125)&&(W<=1.9375)) return 12;
-if ((W>=1.9375)&&(W<=1.9625)) return 13;
-if ((W>=1.9625)&&(W<=1.9875)) return 14;
-if ((W>=1.9875)&&(W<=2.0125)) return 15;
+if ((W>=1.9125)&&(W<=1.9375)) bin = 12;
+if ((W>=1.9375)&&(W<=1.9625)) bin = 13;
+if ((W>=1.9625)&&(W<=1.9875)) bin = 14;
+if ((W>=1.9875)&&(W<=2.0125)) bin = 15;
 
-if ((W>=2.0125)&&(W<=2.0375)) return 16;
-if ((W>=2.0375)&&(W<=2.0625)) return 17;
-if ((W>=2.0625)&&(W<=2.0875)) return 18;
-if ((W>=2.0875)&&(W<=2.1125)) return 19;
+if ((W>=2.0125)&&(W<=2.0375)) bin = 16;
+if ((W>=2.0375)&&(W<=2.0625)) bin = 17;
+if ((W>=2.0625)&&(W<=2.0875)) bin = 18;
+if ((W>=2.0875)&&(W<=2.1125)) bin = 19;
 
-if ((W>=2.1125)&&(W<=2.1375)) return 20;
+if ((W>=2.1125)&&(W<=2.1375)) bin = 20;
 
-if ((W>=2.1375)&&(W<=2.1875)) return 21;
-if ((W>=2.1875)&&(W<=2.2375)) return 22;
-if ((W>=2.2375)&&(W<=2.2875)) return 23;
-if ((W>=2.2875)&&(W<=2.3375)) return 24;
-if ((W>=2.3375)&&(W<=2.3875)) return 25;
-if ((W>=2.3875)&&(W<=2.4375)) return 26;
-if ((W>=2.4375)&&(W<=2.4875)) return 27;
-if ((W>=2.4875)&&(W<=2.5375)) return 28;
+if ((W>=2.1375)&&(W<=2.1875)) bin = 21;
+if ((W>=2.1875)&&(W<=2.2375)) bin = 22;
+if ((W>=2.2375)&&(W<=2.2875)) bin = 23;
+if ((W>=2.2875)&&(W<=2.3375)) bin = 24;
+if ((W>=2.3375)&&(W<=2.3875)) bin = 25;
+if ((W>=2.3875)&&(W<=2.4375)) bin = 26;
+if ((W>=2.4375)&&(W<=2.4875)) bin = 27;
+if ((W>=2.4875)&&(W<=2.5375)) bin = 28;
 
 */
 if ((W<1.6125)||(W>2.5375)) {
-cout << "Error, wrong W range" << "\n";
-return -100;
+cout << "Error, wrong W range, Golovach" << "\n";
+bin = -100;
 }
 
+return bin;
 };
 
 
 //---------
 Short_t getsbin_GOL (Float_t sgen, Float_t Smax, Float_t Smin) {
-if ((sgen>=Smin)&&(sgen<=Smax)) return int((sgen-Smin)/((Smax - Smin)/15.));
-if (sgen<Smin) return 0;
-if (sgen>Smax) return 14;
 
+Short_t bin;
+if ((sgen>=Smin)&&(sgen<=Smax)) bin = int((sgen-Smin)/((Smax - Smin)/15.));
+if (sgen<Smin) bin = 0;
+if (sgen>Smax) bin = 14;
 
+return bin;
 };
 //--------------------
 Short_t getanglebin_GOL (Float_t anglegen, Float_t anglemax) {
 
-if ((anglegen < 0.01)) return 0;
-if ((anglegen > anglemax - 0.01)) return 12;
-if ((anglegen >= 0.01) && (anglegen <= anglemax - 0.01)) return int((anglegen - 0.01)/((anglemax  - 0.02)/13.));
+Short_t bin;
+if ((anglegen < 0.01)) bin = 0;
+if ((anglegen > anglemax - 0.01)) bin = 12;
+if ((anglegen >= 0.01) && (anglegen <= anglemax - 0.01)) bin = int((anglegen - 0.01)/((anglemax  - 0.02)/13.));
 
-
+return bin;
 };
 
 
@@ -112,12 +117,15 @@ Short_t s23right_wleft_bin = s23left_wleft_bin +1;
 Short_t s23left_wright_bin = getsbin_GOL(s23gen, S23_ARR_GOL[15][Wright_bin], S23_ARR_GOL[0][Wright_bin]);
 Short_t s23right_wright_bin = s23left_wright_bin +1;
 
+//cout << s23left_wleft_bin <<" "<< Wgen << " "<<Wleft_bin<< " " << s23gen << " "<< S23_ARR_GOL[s23left_wleft_bin][Wleft_bin] << " "<< S23_ARR_GOL[s23right_wleft_bin][Wleft_bin] << "\n";
+
 Short_t thetaleft_bin = getanglebin_GOL(thetagen,THETA_ARR_GOL[13]);
 Short_t thetaright_bin = thetaleft_bin+1;
 
 Short_t alphaleft_bin = getanglebin_GOL(alphagen,ALPHA_ARR_GOL[13]);
 Short_t alpharight_bin = alphaleft_bin+1;
-//cout << s23left_wleft_bin <<" "<< Wgen << " "<<Wleft_bin<< " " << s23gen << " "<< S23_ARR_GOL[s23left_wleft_bin][Wleft_bin] << " "<< S23_ARR_GOL[s23right_wleft_bin][Wleft_bin] << "\n";
+
+//cout << thetagen <<" "<< thetaleft_bin<<" "<< thetaright_bin<<" \n";
 
 //then we are doing 4d-interpolation for each Wleft_bin and Wright_bin and obtain sigma_wright_gol and sigma_wleft_gol
 interpol_golovach(Wright_bin,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wright_gol);

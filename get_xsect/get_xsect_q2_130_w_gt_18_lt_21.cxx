@@ -14,39 +14,39 @@ using namespace std;
 
 
 Short_t getWbin_rip2 (Float_t W) {
-//return int(W*10000. - 1.4125*10000.)/250;
-//return int((W-1.4125)/0.025);
 
-if ((W>=1.837499)&&(W<=1.8625)) return 0;
-if ((W>=1.8625)&&(W<=1.8875)) return 1;
-if ((W>=1.8875)&&(W<=1.9125)) return 2;
-if ((W>=1.9125)&&(W<=1.9375)) return 3;
+Short_t bin;
+if ((W>=1.837499)&&(W<=1.8625)) bin = 0;
+if ((W>=1.8625)&&(W<=1.8875)) bin = 1;
+if ((W>=1.8875)&&(W<=1.9125)) bin = 2;
+if ((W>=1.9125)&&(W<=1.9375)) bin = 3;
 
-if ((W>=1.9375)&&(W<=1.9625)) return 4;
-if ((W>=1.9625)&&(W<=1.9875)) return 5;
-if ((W>=1.9875)&&(W<=2.0125)) return 6;
-if ((W>=2.0125)&&(W<=2.0375)) return 7;
+if ((W>=1.9375)&&(W<=1.9625)) bin = 4;
+if ((W>=1.9625)&&(W<=1.9875)) bin = 5;
+if ((W>=1.9875)&&(W<=2.0125)) bin = 6;
+if ((W>=2.0125)&&(W<=2.0375)) bin = 7;
 
-if ((W>=2.0375)&&(W<=2.0625)) return 8;
-if ((W>=2.0625)&&(W<=2.0875)) return 9;
+if ((W>=2.0375)&&(W<=2.0625)) bin = 8;
+if ((W>=2.0625)&&(W<=2.0875)) bin = 9;
 
-if ((W>=2.0875)&&(W<=2.1125)) return 10;
-if ((W>=2.1125)&&(W<=2.1375)) return 11;
+if ((W>=2.0875)&&(W<=2.1125)) bin = 10;
+if ((W>=2.1125)&&(W<=2.1375)) bin = 11;
 
-if ((W>=2.1375)&&(W<=2.1875)) return 12;
-if ((W>=2.1875)&&(W<=2.2375)) return 13;
-if ((W>=2.2375)&&(W<=2.2875)) return 14;
-if ((W>=2.2875)&&(W<=2.3375)) return 15;
-if ((W>=2.3375)&&(W<=2.3875)) return 16;
-if ((W>=2.3875)&&(W<=2.4375)) return 17;
-if ((W>=2.4375)&&(W<=2.4875)) return 18;
-if ((W>=2.4875)&&(W<=2.5375)) return 19;
+if ((W>=2.1375)&&(W<=2.1875)) bin = 12;
+if ((W>=2.1875)&&(W<=2.2375)) bin = 13;
+if ((W>=2.2375)&&(W<=2.2875)) bin = 14;
+if ((W>=2.2875)&&(W<=2.3375)) bin = 15;
+if ((W>=2.3375)&&(W<=2.3875)) bin = 16;
+if ((W>=2.3875)&&(W<=2.4375)) bin = 17;
+if ((W>=2.4375)&&(W<=2.4875)) bin = 18;
+if ((W>=2.4875)&&(W<=2.5375)) bin = 19;
 
 if ((W < 1.8125)||(W > 2.538)) {
-cout << "Error, wrong W range " << W<< " e677" << "\n";
-return -100;
+cout << "Error, wrong W range, Rip2 " << "\n";
+bin = -100;
 }
 
+return bin;
 };
 
 
@@ -59,6 +59,7 @@ Float_t A_tmp[11];
 //cout << getWbin_rip2(2.0875) << "\n";
 
 //cout << Wgen <<" "<< Wleft_bin << " " <<Wright_bin <<"\n";
+
 Float_t sigma_t_wright_gol,sigma_t_wleft_gol, sigma_t_rip2,sigma_l_rip2;
 Float_t sigma_t_gol;
 Short_t w_left_bin_gol;
@@ -79,7 +80,7 @@ Short_t s23right_wleft_bin = s23left_wleft_bin +1;
 Short_t s23left_wright_bin = getsbin(Wright_bin, s23gen, S23_ARR_RIP2[11][Wright_bin], S23_ARR_RIP2[0][Wright_bin]);
 Short_t s23right_wright_bin = s23left_wright_bin +1;
 
-
+//cout << s23left_wleft_bin <<" "<< Wgen << " "<<Wleft_bin<< " " << s23gen << " "<< S23_ARR_RIP2[s23left_wleft_bin][Wleft_bin] << " "<< S23_ARR_RIP2[s23right_wleft_bin][Wleft_bin] << "\n";
 
 Short_t thetaleft_bin = getanglebin(thetagen,THETA_ARR[5]);
 Short_t thetaright_bin = thetaleft_bin+1;

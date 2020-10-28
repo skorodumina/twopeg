@@ -14,20 +14,18 @@
 using namespace std;
 
 Short_t getWbin_fed_thresh (Float_t W) {
-//return int(W*10000. - 1.4125*10000.)/250;
-//return int((W-1.4125)/0.025);
 
-
-if ((W>=1.2375)&&(W<=1.2625)) return 0;
-if ((W>=1.2625)&&(W<=1.2875)) return 1;
-if ((W>=1.2875)&&(W<=1.3125)) return 2;
-
-
+Short_t bin;
+if ((W>=1.2375)&&(W<=1.2625)) bin = 0;
+if ((W>=1.2625)&&(W<=1.2875)) bin = 1;
+if ((W>=1.2875)&&(W<=1.3125)) bin = 2;
 
 if ((W<1.2375)||(W>1.3125)) {
-cout << "Error, wrong W range "  <<W<< "\n";
-return -100;
+cout << "Error, wrong W range, threshold "<< "\n";
+bin = -100;
 };
+
+return bin;
 };
 
 
@@ -41,6 +39,8 @@ Float_t sigma_wl_both[6];
 
 Short_t Wleft_bin = getWbin_fed_thresh(Wgen);
 Short_t Wright_bin = Wleft_bin+1;
+
+//cout << Wgen<<" "<< Wleft_bin<< " "<< Wright_bin<< endl;
 
 Short_t Q2left_bin,Q2right_bin ;
 

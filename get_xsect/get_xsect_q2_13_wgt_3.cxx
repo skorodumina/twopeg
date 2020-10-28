@@ -17,40 +17,40 @@ using namespace std;
 
 Short_t getWbin_q2_13_wgt_3 (Float_t W) {
 
-if ((W>=3.1375)&&(W<=3.2375)) return 0;
-if ((W>=3.2375)&&(W<=3.3375)) return 1;
-if ((W>=3.3375)&&(W<=3.4375)) return 2;
-if ((W>=3.4375)&&(W<=3.5375)) return 3;
-if ((W>=3.5375)&&(W<=3.6375)) return 4;
-if ((W>=3.6375)&&(W<=3.7375)) return 5;
-if ((W>=3.7375)&&(W<=3.8375)) return 6;
-if ((W>=3.8375)&&(W<=3.9375)) return 7;
-if ((W>=3.9375)&&(W<=4.0375)) return 8;
-if ((W>=4.0375)&&(W<=4.1375)) return 9;
-if ((W>=4.1375)&&(W<=4.2375)) return 10;
-if ((W>=4.2375)&&(W<=4.3375)) return 11;
-if ((W>=4.3375)&&(W<=4.4375)) return 12;
-if ((W>=4.4375)&&(W<=4.5375)) return 13;
+Short_t bin;
+if ((W>=3.1375)&&(W<=3.2375)) bin = 0;
+if ((W>=3.2375)&&(W<=3.3375)) bin = 1;
+if ((W>=3.3375)&&(W<=3.4375)) bin = 2;
+if ((W>=3.4375)&&(W<=3.5375)) bin = 3;
+if ((W>=3.5375)&&(W<=3.6375)) bin = 4;
+if ((W>=3.6375)&&(W<=3.7375)) bin = 5;
+if ((W>=3.7375)&&(W<=3.8375)) bin = 6;
+if ((W>=3.8375)&&(W<=3.9375)) bin = 7;
+if ((W>=3.9375)&&(W<=4.0375)) bin = 8;
+if ((W>=4.0375)&&(W<=4.1375)) bin = 9;
+if ((W>=4.1375)&&(W<=4.2375)) bin = 10;
+if ((W>=4.2375)&&(W<=4.3375)) bin = 11;
+if ((W>=4.3375)&&(W<=4.4375)) bin = 12;
+if ((W>=4.4375)&&(W<=4.5375)) bin = 13;
 
 if ((W <3.1374 )||(W > 4.5376)) {
-cout << "Error, wrong W range " << W<< " e234" << "\n";
-return -100;
+cout << "Error, wrong W range, Wgtr3" << "\n";
+bin = -100;
 };
+
+return bin;
 };
 
 Short_t getsbin_wgt_3 (Float_t sgen, Float_t Smax, Float_t Smax2, Float_t Smin) {
-//if ((sgen>=Smin)&&(sgen<=Smax2)) return int((sgen-Smin)/((Smax2 - Smin)/5.));
-//if ((sgen>=Smax2)&&(sgen<=Smax)) return 5 + int((sgen-Smax2)/((Smax - Smax2)/10.));
-//if ((sgen>=Smin)&&(sgen<=Smax2)) return int((sgen-Smin)/((Smax2 - Smin)/13.));
-//if ((sgen>=Smax2)&&(sgen<=Smax)) return 13 + int((sgen-Smax2)/((Smax - Smax2)/2.));
-if ((sgen>=Smin)&&(sgen<=Smax2)) return int((sgen-Smin)/((Smax2 - Smin)/11.));
-if ((sgen>=Smax2)&&(sgen<=Smax)) return 11 + int((sgen-Smax2)/((Smax - Smax2)/4.));
 
+Short_t bin;
+if ((sgen>=Smin)&&(sgen<=Smax2)) bin = int((sgen-Smin)/((Smax2 - Smin)/11.));
+if ((sgen>=Smax2)&&(sgen<=Smax)) bin = 11 + int((sgen-Smax2)/((Smax - Smax2)/4.));
 
-if (sgen<Smin) return 0;
-if (sgen>Smax) return 14;
+if (sgen<Smin) bin = 0;
+if (sgen>Smax) bin = 14;
 
-
+return bin;
 };
 
 void get_xsect_q2_13_wgt_3(Float_t Q2gen, Float_t Wgen, Float_t s12gen,Float_t s23gen, Float_t thetagen, Float_t alphagen, Float_t phigen, Float_t &sigma_t_final, Float_t &sigma_l_final,Float_t  &sigma_c2f_final,Float_t  &sigma_s2f_final,Float_t &sigma_cf_final,Float_t  &sigma_sf_final){
@@ -75,7 +75,7 @@ Short_t  s23right_wleft_bin = s23left_wleft_bin +1;
 Short_t  s23left_wright_bin = getsbin_wgt_3(s23gen, S23_ARR_gt_3[15][Wright_bin],S23_ARR_gt_3[11][Wright_bin], S23_ARR_gt_3[0][Wright_bin]);
 Short_t  s23right_wright_bin = s23left_wright_bin +1;
 
-
+//cout << s23left_wleft_bin <<" "<< Wgen << " "<<Wleft_bin<< " " << s23gen << " "<< S23_ARR_gt_3[s23left_wleft_bin][Wleft_bin] << " "<< S23_ARR_gt_3[s23right_wleft_bin][Wleft_bin] << "\n";
 
 Short_t thetaleft_bin = getanglebin(thetagen,THETA_ARR[5]);
 Short_t thetaright_bin = thetaleft_bin+1;

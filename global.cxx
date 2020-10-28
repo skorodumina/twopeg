@@ -152,7 +152,7 @@ std::ofstream out_lund_stream;
 std::ostringstream data_dir_2pi;
 std::ostringstream PATH;
 
-int global(){
+void global(){
 //Starting values
 px_fermi =0.;
 py_fermi =0.;

@@ -16,7 +16,7 @@
 //input_cmd_line(...) -- for supporting the command line input. All the parameters are first taken from "data/inp_cmd_line". Then Nevents can be reassigned according to the command line "--trig" option if the one was specified.
 //inp_couts(...) -- for interactive communication with the user. Prints to the screen all the input parameters along with some comments on their compatibility.
 
-int input_stream(Float_t &E_beam) {
+void input_stream(Float_t &E_beam) {
 
 cout << endl;
 cout << "The cin stream input is used\n";
@@ -138,7 +138,7 @@ flag_flux= atof(qqq.c_str());
 
 //------------------------
 
-int input_cmd_line(Float_t &E_beam, Int_t &argc,  char *argv[]) {
+void input_cmd_line(Float_t &E_beam, Int_t &argc,  char *argv[]) {
 
 cout << endl;
 cout << "The cmd line input is used \nSee 'data/inp_cmd_line' for input parameters\n";
@@ -299,7 +299,7 @@ cout << "Accoring to '--trig', Nevents was set to " <<Nevents<<"\n\n";
 //-----------------------------------
    
   
-int inp_couts(Float_t &E_beam) {
+void inp_couts(Float_t &E_beam) {
  
   
 cout <<"____________INPUT PARAMETERS:______________\n\n";

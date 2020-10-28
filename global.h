@@ -135,5 +135,5 @@ extern std::ofstream out_lund_stream;
 extern std::ostringstream data_dir_2pi;
 extern std::ostringstream PATH;
 
-int global();
+void global();
 #endif

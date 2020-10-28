@@ -17,22 +17,23 @@ using namespace std;
 
 Short_t getWbin_rip3 (Float_t W) {
 
-if ((W>=2.5875)&&(W<=2.6375)) return 0;
-if ((W>=2.6375)&&(W<=2.6875)) return 1;
-if ((W>=2.6875)&&(W<=2.7375)) return 2;
-if ((W>=2.7375)&&(W<=2.7875)) return 3;
-if ((W>=2.7875)&&(W<=2.8375)) return 4;
-if ((W>=2.8375)&&(W<=2.8875)) return 5;
-if ((W>=2.8875)&&(W<=2.9375)) return 6;
-if ((W>=2.9375)&&(W<=2.9875)) return 7;
-if ((W>=2.9875)&&(W<=3.0375)) return 8;
+Short_t bin;
+if ((W>=2.5875)&&(W<=2.6375)) bin = 0;
+if ((W>=2.6375)&&(W<=2.6875)) bin = 1;
+if ((W>=2.6875)&&(W<=2.7375)) bin = 2;
+if ((W>=2.7375)&&(W<=2.7875)) bin = 3;
+if ((W>=2.7875)&&(W<=2.8375)) bin = 4;
+if ((W>=2.8375)&&(W<=2.8875)) bin = 5;
+if ((W>=2.8875)&&(W<=2.9375)) bin = 6;
+if ((W>=2.9375)&&(W<=2.9875)) bin = 7;
+if ((W>=2.9875)&&(W<=3.0375)) bin = 8;
 
 
 if ((W <2.58749 )||(W > 3.038)) {
-cout << "Error, wrong W range " << W<< " e234" << "\n";
-return -100;
+cout << "Error, wrong W range, WRIP3 " << "\n";
+bin = -100;
 }
-
+return bin;
 };
 //This subrouting is doing the following:
 //1 - using auxiliary functions (getWbin, getQ2bin, getsbin, getanglebin) we identify the number of left and right point 
@@ -48,6 +49,7 @@ Float_t A_tmp[11];
 //cout << getWbin_rip2(2.0875) << "\n";
 
 //cout << Wgen <<" "<< Wleft_bin << " " <<Wright_bin <<"\n";
+
 Float_t sigma_t_wright_gol,sigma_t_wleft_gol, sigma_t_rip2,sigma_l_rip2;
 Float_t sigma_t_gol;
 Short_t w_left_bin_gol;

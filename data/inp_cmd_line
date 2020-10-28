@@ -1,11 +1,11 @@
-100000       // Number of events to be generated
-2.039      // Beam energy (GeV)
+100400       // Number of events to be generated
+6      // Beam energy (GeV)
 1.4            // W minimum (GeV) 
-2.3           // Wmaximum (GeV)
-0.05       // Q2 minimum (GeV^2)
-3.5     // Q2 maximum (GeV^2)
+1.8           // Wmaximum (GeV)
+0.5       // Q2 minimum (GeV^2)
+1.4     // Q2 maximum (GeV^2)
 1.              // minimal theta of scattered electron (deg)
-50.0              // maximal theta of scattered electron (deg)
+60.0              // maximal theta of scattered electron (deg)
 0.01            // minimal energy of scattered electron (GeV)
 0.6                // Target radius in cm
 2.0                // Target length in cm

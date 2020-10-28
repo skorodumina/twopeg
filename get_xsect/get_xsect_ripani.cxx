@@ -17,36 +17,34 @@ using namespace std;
 Short_t getWbin (Float_t W) {
 //return int(W*10000. - 1.4125*10000.)/250;
 //return int((W-1.4125)/0.025);
+Short_t bin;
 
-if ((W>=1.4125)&&(W<=1.4375)) return 0;
-if ((W>=1.4375)&&(W<=1.4625)) return 1;
-if ((W>=1.4625)&&(W<=1.4875)) return 2;
-if ((W>=1.4875)&&(W<=1.5125)) return 3;
+if ((W>=1.4125)&&(W<=1.4375)) bin = 0;
+if ((W>=1.4375)&&(W<=1.4625)) bin = 1;
+if ((W>=1.4625)&&(W<=1.4875)) bin = 2;
+if ((W>=1.4875)&&(W<=1.5125)) bin = 3;
 
-if ((W>=1.5125)&&(W<=1.5375)) return 4;
-if ((W>=1.5375)&&(W<=1.5625)) return 5;
-if ((W>=1.5625)&&(W<=1.5875)) return 6;
-if ((W>=1.5875)&&(W<=1.6125)) return 7;
+if ((W>=1.5125)&&(W<=1.5375)) bin = 4;
+if ((W>=1.5375)&&(W<=1.5625)) bin = 5;
+if ((W>=1.5625)&&(W<=1.5875)) bin = 6;
+if ((W>=1.5875)&&(W<=1.6125)) bin = 7;
 
-if ((W>=1.6125)&&(W<=1.6375)) return 8;
-if ((W>=1.6375)&&(W<=1.6625)) return 9;
-if ((W>=1.6625)&&(W<=1.6875)) return 10;
-if ((W>=1.6875)&&(W<=1.7125)) return 11;
+if ((W>=1.6125)&&(W<=1.6375)) bin = 8;
+if ((W>=1.6375)&&(W<=1.6625)) bin = 9;
+if ((W>=1.6625)&&(W<=1.6875)) bin = 10;
+if ((W>=1.6875)&&(W<=1.7125)) bin = 11;
 
-if ((W>=1.7125)&&(W<=1.7375)) return 12;
-if ((W>=1.7375)&&(W<=1.7625)) return 13;
-if ((W>=1.7625)&&(W<=1.7875)) return 14;
-if ((W>=1.7875)&&(W<=1.8125)) return 15;
+if ((W>=1.7125)&&(W<=1.7375)) bin = 12;
+if ((W>=1.7375)&&(W<=1.7625)) bin = 13;
+if ((W>=1.7625)&&(W<=1.7875)) bin = 14;
+if ((W>=1.7875)&&(W<=1.8125)) bin = 15;
 
 if ((W<1.4125)||(W>1.8125)) {
-cout << "Error, wrong W range ww" << "\n";
-return -100;
+cout << "Error, wrong W range, Ripani" << "\n";
+bin = -100;
 }
 
-
-
-
-
+return bin;
 };
 
 //Short_t getWbin (Float_t Wgen, Float_t Wmax, Float_t Wmin) {
@@ -55,31 +53,38 @@ return -100;
 
 //-------
 Short_t getQ2bin (Float_t Q2) {
-if ((Q2 >= 0.65) && (Q2 < 0.95)) return 0;
-if ((Q2 >= 0.95) && (Q2 <= 1.3)) return 1;
+
+Short_t bin;
+
+if ((Q2 >= 0.65) && (Q2 < 0.95)) bin = 0;
+if ((Q2 >= 0.95) && (Q2 <= 1.3)) bin = 1;
 if ((Q2 < 0.65) || (Q2 > 1.3)) {
-cout << "Error, wrong Q2 range" << "\n";
-return -100;
+cout << "Error, wrong Q2 range, Ripani" << "\n";
+bin = -100;
 };
+
+return bin;
 };
 
 //---------
 Short_t getsbin (Short_t Wbin, Float_t sgen, Float_t Smax, Float_t Smin) {
-if ((sgen>=Smin)&&(sgen<=Smax)) return int((sgen-Smin)/((Smax - Smin)/11.));
-if (sgen<Smin) return 0;
-if (sgen>Smax) return 10;
 
+Short_t bin;
+if ((sgen>=Smin)&&(sgen<=Smax)) bin = int((sgen-Smin)/((Smax - Smin)/11.));
+if (sgen<Smin) bin = 0;
+if (sgen>Smax) bin = 10;
 
-
+return bin;
 };
 //--------------------
 Short_t getanglebin (Float_t anglegen, Float_t anglemax) {
 
-if ((anglegen < 0.01)) return 0;
-if ((anglegen > anglemax - 0.01)) return 4;
-if ((anglegen >= 0.01) && (anglegen <= anglemax - 0.01)) return int((anglegen - 0.01)/((anglemax  - 0.02)/5.));
+Short_t bin;
+if ((anglegen < 0.01)) bin = 0;
+if ((anglegen > anglemax - 0.01)) bin = 4;
+if ((anglegen >= 0.01) && (anglegen <= anglemax - 0.01)) bin = int((anglegen - 0.01)/((anglemax  - 0.02)/5.));
 
-
+return bin;
 };
 
 
@@ -100,14 +105,13 @@ Short_t Wright_bin = Wleft_bin+1;
 
 Short_t Q2left_bin = getQ2bin(Q2gen);
 Short_t Q2right_bin = Q2left_bin+1;
+//cout << Q2gen <<" "<< Q2left_bin << " " <<Q2right_bin <<"\n";
 
 Short_t s12left_wleft_bin = getsbin(Wleft_bin, s12gen, S12_ARR[11][Wleft_bin], S12_ARR[0][Wleft_bin]);
 Short_t s12right_wleft_bin = s12left_wleft_bin +1;
 
 Short_t s12left_wright_bin = getsbin(Wright_bin, s12gen, S12_ARR[11][Wright_bin], S12_ARR[0][Wright_bin]);
 Short_t s12right_wright_bin = s12left_wright_bin +1;
-
-
 
 Short_t s23left_wleft_bin = getsbin(Wleft_bin, s23gen, S23_ARR[11][Wleft_bin], S23_ARR[0][Wleft_bin]);
 Short_t s23right_wleft_bin = s23left_wleft_bin +1;

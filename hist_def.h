@@ -70,6 +70,6 @@ extern    TH1F *h_odn_q2_dep_l2[33];
 extern    TH1F *h_odn_q2_dep_tot[33];
      
 
-int hist_def(Float_t E_beam);
+void hist_def(Float_t E_beam);
 
 

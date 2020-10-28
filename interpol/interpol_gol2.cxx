@@ -8,6 +8,8 @@
 
 using namespace std;
 
+//Note that SIGMA_ARR_GOL2 is the same as SIGMA_ARR_RIP3, but with scaling coefficients (W, s12, 23, and angles dependent). Both SIGMA sets are taken from the model without relying on the data.
+
 void interpol_gol2(Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter){
 
 

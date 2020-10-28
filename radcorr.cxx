@@ -67,6 +67,7 @@ return 4./3.*(1. + ((Z+1.)/(Z+xi))/(log(183.) - log(Z)/3.)/9.);
 //Spence-function-----------------------------------------------------------------------
 Float_t Spence(Float_t x){
 
+Float_t value;
 Float_t null = 1E-8;
 
 if ((x>=null)&&(x<=1.)) {
@@ -75,7 +76,7 @@ if ((x>=null)&&(x<=1.)) {
    ROOT::Math::GaussIntegrator ig;
    ig.SetFunction(wf1);
    ig.SetRelTolerance(1E-8);
-   return ig.Integral(null, x);
+   value = ig.Integral(null, x);
 };
 
 if (x>=1.) {
@@ -84,7 +85,7 @@ if (x>=1.) {
    ROOT::Math::GaussIntegrator ig;
    ig.SetFunction(wf1);
    ig.SetRelTolerance(1E-8);
-   return M_PI*M_PI/6. + ig.Integral(1., x);
+   value = M_PI*M_PI/6. + ig.Integral(1., x);
   };
  
  
@@ -94,12 +95,12 @@ if (x>=1.) {
    ROOT::Math::GaussIntegrator ig;
    ig.SetFunction(wf1);
    ig.SetRelTolerance(1E-8);
-   return -1.*ig.Integral(x, -1*null);
+   value = -1.*ig.Integral(x, -1*null);
   };
- 
- 
- if ((x>=-1.*null)&&(x<=null)) return 0.;
- 
+  
+ if ((x>=-1.*null)&&(x<=null)) value = 0.;
+
+return value; 
  };
 
 
@@ -110,6 +111,7 @@ if (x>=1.) {
 //* calculation of 2dim linearly interpolated intergated 2pi cross-section (in W-Q2 variables) including calculation sigma_t and sigma_l separately and their combonation with eps_L
 //*  multiplying by the Gamma_V_dE_dOm - virtual photon flux for the case (E_f, Omega variables)
 Float_t s1_radsoft(Float_t E_beam, Float_t Q2gen, Float_t Wgen){
+
 
 Float_t sec_test_t,sec_test_l,sec_total;
 

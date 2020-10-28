@@ -92,7 +92,7 @@
         
       
       
-     int hist_def(Float_t E_beam){
+     void hist_def(Float_t E_beam){
      
 Float_t phi_e_min = 0;
 Float_t phi_e_max = 2*M_PI;
