@@ -127,7 +127,7 @@ global();
     
 //This is a directory for cross section files taking. By default it is /data 
 data_dir = getenv("data_dir_2pi");
-data_dir_2pi << data_dir;
+data_dir_2pi << data_dir << "/";
 cout << "DATA DIR IS " << data_dir_2pi.str() << endl;
  
  
