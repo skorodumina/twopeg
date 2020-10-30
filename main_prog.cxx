@@ -104,6 +104,9 @@ global();
     Float_t inv_m12_tst,inv_m23_tst,inv_m13_tst,th_hadr_tst,alph_hadr_tst,ph_hadr_tst;  
     Float_t z_EL, x_EL, y_EL,r_vert, phi_vert;
     Float_t e_rad_phot, cr_rad_fact;
+    Short_t flag_seed = 0;
+    Int_t seed = 0;
+    
     
     Float_t V_flux = 0.;
     Float_t alph_const = 1./137.035;
@@ -125,10 +128,11 @@ global();
    
     ostringstream qqq;
     
-//This is a directory for cross section files taking. By default it is /data 
-data_dir = getenv("data_dir_2pi");
+//This is the environment variable that points to the "data" folder with the cross section files.
+//By default it points to the current directory (in which the EG executes). 
+data_dir = getenv("TWOPEG_DATA_DIR");
 data_dir_2pi << data_dir << "/";
-cout << "DATA DIR IS " << data_dir_2pi.str() << endl;
+cout << "TWOPEG_DATA_DIR is " << data_dir_2pi.str() << endl;
  
  
 //This needed for taking masses of the particles from pdg_table located in ROOT_DIR
@@ -155,7 +159,7 @@ Me= part1->Mass();
 
 //Reading input parameters
 if (argc<2) input_stream(E_beam);
-if (argc>=2) input_cmd_line(E_beam, argc,argv);
+if (argc>=2) input_cmd_line(E_beam, argc,argv, flag_seed, seed);
 inp_couts(E_beam);
 
 //Reading diff cross section from the tables in .dat files (filling out GLOBAL arrays)
@@ -236,7 +240,8 @@ cout <<"\n";
 
  cout << "____________EVENT GENERATION:______________\n\n";
  
-srand (time(NULL));
+if (flag_seed == 0) srand (time(NULL));
+if (flag_seed == 1) srand (seed);
        
  TRandom3 ph_e_rndm(UInt_t(((float) rand() / (float)(RAND_MAX))*4000000000.));
  TRandom3 th_hadr_rndm(UInt_t(((float) rand() / (float)(RAND_MAX))*4000000000.));

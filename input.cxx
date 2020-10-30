@@ -138,7 +138,7 @@ flag_flux= atof(qqq.c_str());
 
 //------------------------
 
-void input_cmd_line(Float_t &E_beam, Int_t &argc,  char *argv[]) {
+void input_cmd_line(Float_t &E_beam, Int_t &argc,  char *argv[], Short_t &flag_seed, Int_t &seed) {
 
 cout << endl;
 cout << "The cmd line input is used \nSee 'data/inp_cmd_line' for input parameters\n";
@@ -147,7 +147,7 @@ cout << endl;
 string qqq;
 string inp_file_name;
 bool check_open_fail;
-
+Int_t n_trig = 0;
 
 //Building the full name of the input file 
 PATH << data_dir_2pi.str() << "data/inp_cmd_line";
@@ -284,15 +284,26 @@ input.close();
 if (!check_open_fail){
 for (Short_t i=0;i<argc;i++){
 std::string arg = argv[i];
+
 if (arg=="--trig") {
-
-Nevents = atoi(argv[i+1]);
-cout << "Accoring to '--trig', Nevents was set to " <<Nevents<<"\n\n";
-}
+n_trig = abs(atoi(argv[i+1]));
+if (!(n_trig == 0)){
+Nevents = n_trig;
+cout << "Accoring to '--trig', Nevents was set to " <<Nevents<<"\n";
 };
 };
 
+if (arg=="--seed") {
+seed = abs(atoi(argv[i+1]));
+if (!(seed == 0)){
+flag_seed = 1;
+cout << "Accoring to '--seed', seed was set to " <<seed<<"\n";
+};
+};
 
+};
+};
+cout << endl;
 
 };     
     
