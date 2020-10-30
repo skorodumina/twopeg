@@ -49,7 +49,7 @@ The generator supports two options for taking the input parameters:
 
 1) As a cin stream from a certain input file. To use this option run as "./twopeg_bos.exe < inp1" (or "./twopeg < inp1"), where inp1 is in the same directory and contains input parameters with comments. 
 
-2) The command line input is also supported. For this option all input parameters are automatically taken from "data/inp_cmd_line". The EG should then be run as "./twopeg a", where "a" is any charachter. The following command line options are avaliable:
+2) The command line input is also supported. For this option all input parameters are automatically taken from "data/inp_cmd_line". The EG then can be run as "./twopeg a", where "a" is any charachter. The following command line options are also avaliable:
 
 "--trig <value>" resets the number of events to the specified value,
 
