@@ -51,9 +51,8 @@ The generator supports two options for taking the input parameters:
 
 2) The command line input is also supported. For this option all input parameters are automatically taken from "data/inp_cmd_line". The EG should then be run as "./twopeg_bos.exe a" (or "./twopeg a"), where "a" is any charachter. The following command line options are avaliable:
 
-	"--trig <value>" resets the number of events to the specified value,
-	"--seed <value>" sets the random seed to the specified value. 
-			 If the option is not used, the EG takes the random seed from time(NULL).
+"--trig <value>" resets the number of events to the specified value,
+"--seed <value>" sets the random seed to the specified value. If the option is not used, the EG takes the random seed from time(NULL).
 
 
 --------------------------------------------------
