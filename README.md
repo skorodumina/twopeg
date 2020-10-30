@@ -24,9 +24,9 @@ main_prog.cxx - the main program,
 
 input.cxx - reads input parameters,
 
-read_xsect_files.cxx - reads the files with cross sections from the corresponding directories, 
+read_xsect_files.cxx - reads the files with cross sections from the "data" sub-folder, 
 
-out_file_open.cxx, out_file_fill.cxx, out_file_close.cxx - are needed to open fill, and close output files, r espectively,
+out_file_open.cxx, out_file_fill.cxx, out_file_close.cxx - are needed to open fill, and close output files, respectively,
 
 anti_rot.cxx - contains the subroutine that calculates the 4-vectors of all final particles in the lab frame from  W, Q2 and hadron variables generated in the CMS,
 
@@ -49,11 +49,16 @@ The generator supports two options for taking the input parameters:
 
 1) As a cin stream from a certain input file. To use this option run as "./twopeg_bos.exe < inp1" (or "./twopeg < inp1"), where inp1 is in the same directory and contains input parameters with comments. 
 
-2) The command line input is also supported. For this option all input parameters are automatically taken from "data/inp_cmd_line". The EG should then be run as "./twopeg_bos.exe a" (or "./twopeg a"), where "a" is any charachter. The number of events to generate can also be reset with "./twopeg_bos.exe --trig Nevents" (or "./twopeg --trig Nevents"), where "Nevents" is the desired number of events.
+2) The command line input is also supported. For this option all input parameters are automatically taken from "data/inp_cmd_line". The EG should then be run as "./twopeg_bos.exe a" (or "./twopeg a"), where "a" is any charachter. The following command line options are avaliable:
+
+	"--trig <value>" resets the number of events to the specified value,
+	"--seed <value>" sets the random seed to the specified value. 
+			 If the option is not used, the EG takes the random seed from time(NULL).
+
 
 --------------------------------------------------
 
-The generator needs "dat" files with tabulated structure functions and fit parameters. They are located in the "data" subfolder inside the EG directory. If you move it, you need to define the environment variable "data_dir_2pi" that points to the new folder location (e.g. in csh use "setenv data_dir_2pi new_path/").
+The generator needs "dat" files with tabulated structure functions and fit parameters. They are located in the "data" subfolder inside the EG directory. If you move it, you need to define the environment variable "TWOPEG_DATA_DIR" that points to the new folder location (e.g. in csh use "setenv TWOPEG_DATA_DIR new_path/").
 
 --------------------------------------------------
 
