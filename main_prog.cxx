@@ -79,8 +79,27 @@
      return x*x*y+x*y*y+z*z*u+z*u*u+v*v*w+v*w*w+x*z*w+x*u*v+y*z*v+y*u*w-x*y*(z+u+v+w)-z*u*(x+y+v+w)-v*w*(x+y+z+u);
      };
 
+//This is the function that peprformes generation. It is declared here and executes below.   
+void generate(Int_t argc, char *argv[]);
 
-int main(int argc, char** argv) {
+
+int main(int argc, char** argv){
+std::string arg;
+
+if (argc < 2) generate(argc,argv);
+
+if (argc >= 2){
+arg =   argv[1];
+if (arg == "--help") cmdl_help();
+if (!(arg == "--help"))  generate(argc,argv);
+};
+
+return 0;
+};
+
+
+//This is the function that peprformes generation.
+void generate(Int_t argc, char *argv[]) {
 
 global();
 
@@ -159,63 +178,57 @@ Me= part1->Mass();
 
 //Reading input parameters
 if (argc<2) input_stream(E_beam);
-if (argc>=2) input_cmd_line(E_beam, argc,argv, flag_seed, seed);
+if (argc>=2) input_cline(E_beam, argc,argv, flag_seed, seed);
 inp_couts(E_beam);
 
 //Reading diff cross section from the tables in .dat files (filling out GLOBAL arrays)
 read_xsect_files();
 //Reading fit parameterms, which are needed for cross section extrapolation
 read_fit_param_files();
-   
-    P4_Pini.SetXYZT(0.,0.,0.,MP); 
-    P4_Eini.SetXYZT(0.,0.,E_beam,E_beam);
- 
-     
-   //Reasonably changing max&min limits of kinematical variables if needed
-    cout << "___________________________________________\n\n";
-    
-     if (W_min < (1.2375)) {
-    W_min = 1.2375;
-    cout << "Minimum W  has been changed to " << W_min << "\n";
-    }; 
-      
-    if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min)) {
-    W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min));
-    };
-    
-    Q2lim1 = 2*E_beam*sin(Theta_min*M_PI/180./2.)*sin(Theta_min*M_PI/180./2.);
-    Q2lim1 = Q2lim1*(2*E_beam*MP-W_max*W_max+MP*MP);
-    Q2lim1 = Q2lim1/(MP+2*E_beam*sin(Theta_min*M_PI/180./2.)*sin(Theta_min*M_PI/180./2.));
-    
-    if (Q2_min < Q2lim1) {
-    Q2_min =Q2lim1;
-    cout << "Minimum Q2 has been changed to " << Q2_min << "\n";
-    };
- 
-   
-    Q2lim2 = 2*E_beam*sin(Theta_max*M_PI/180./2.)*sin(Theta_max*M_PI/180./2.);
-    Q2lim2 = Q2lim2*(2*E_beam*MP-W_min*W_min+MP*MP);
-    Q2lim2 = Q2lim2/(MP+2*E_beam*sin(Theta_max*M_PI/180./2.)*sin(Theta_max*M_PI/180./2.));
-    
-  
-    if (Q2_max > Q2lim2) {
-    Q2_max = Q2lim2;
-    cout << "Maximum Q2 has been changed to " << Q2_max << "\n";
-    };
-     
-   
-    if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min) {
-    W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min);
-    cout << "Maximum W  has been changed to " << W_max << "\n";
-    };
-  
-
-    
 //Defining some histograms
-hist_def(E_beam);
-   
+hist_def(E_beam);   
      
- //Chosing variable set  
+//Reasonably changing max&min limits of kinematical variables if needed
+cout << "___________________________________________\n\n";
+    
+if (W_min < (1.2375)) {
+W_min = 1.2375;
+cout << "Minimum W  has been changed to " << W_min << "\n";
+}; 
+      
+if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min)) {
+W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min));
+};
+    
+Q2lim1 = 2*E_beam*sin(Theta_min*M_PI/180./2.)*sin(Theta_min*M_PI/180./2.);
+Q2lim1 = Q2lim1*(2*E_beam*MP-W_max*W_max+MP*MP);
+Q2lim1 = Q2lim1/(MP+2*E_beam*sin(Theta_min*M_PI/180./2.)*sin(Theta_min*M_PI/180./2.));
+    
+if (Q2_min < Q2lim1) {
+Q2_min = Q2lim1;
+cout << "Minimum Q2 has been changed to " << Q2_min << "\n";
+};
+    
+Q2lim2 = 2*E_beam*sin(Theta_max*M_PI/180./2.)*sin(Theta_max*M_PI/180./2.);
+Q2lim2 = Q2lim2*(2*E_beam*MP-W_min*W_min+MP*MP);
+Q2lim2 = Q2lim2/(MP+2*E_beam*sin(Theta_max*M_PI/180./2.)*sin(Theta_max*M_PI/180./2.));
+   
+if (Q2_max > Q2lim2) {
+Q2_max = Q2lim2;
+cout << "Maximum Q2 has been changed to " << Q2_max << "\n";
+};
+   
+if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min) {
+W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min);
+cout << "Maximum W  has been changed to " << W_max << "\n";
+};
+  
+//Defining the 4-vectors of the initial particles (e and p)
+P4_Pini.SetXYZT(0.,0.,0.,MP); 
+P4_Eini.SetXYZT(0.,0.,E_beam,E_beam);
+    
+     
+//Chosing the variable set  
 //Second set of variables. FOR 1-PIM, 2-PIP, 3-P
      M1 = MPIM;
      M2 = MPIP;
@@ -315,10 +328,8 @@ Wnew = W;
 W_ferm = W;
 Q2new = Q2;
 
-
 //Radiative effects
 if ((flag_radmod == 1)||(flag_radmod == 2)){
-
 
 radcorr(phot_rndm.Uniform(0.,1.),hardini_rndm.Uniform(0.,1.),hardfin_rndm.Uniform(0.,1.), E_beam,Q2,W,Wnew,Q2new,E_beam_new,e_rad_phot,cr_rad_fact);
 h_eradgam->Fill(e_rad_phot,1.);
@@ -343,7 +354,6 @@ do {
 
 fermi_bonn(fermi_R_rndm.Uniform(0.,0.9999679),fermi_R1_rndm.Uniform(0.,1.),fermi_theta_rndm.Uniform(-1.,1.),fermi_phi_rndm.Uniform(0.,2.*M_PI));
 
-
 //The four-momentum of the moving initial proton in the Lab frame
 P4_Pini_fermi.SetXYZT(px_fermi,py_fermi,pz_fermi,sqrt(MP*MP+px_fermi*px_fermi+py_fermi*py_fermi+pz_fermi*pz_fermi));
  
@@ -351,14 +361,12 @@ W_ferm = (P4_Pini_fermi + P4_Eini_new - P4_E_prime_new).Mag();
   
 } while (W_ferm < 1.2375 );
 
-
 //for fermi motion
 fermi_rot(E_beam_fermi,theta_rot2,E_beam_new,P4_E_prime_new,P4_E_prime_boosted); 
 phi_e = P4_E_prime_boosted.Phi();
 W = W_ferm;
 h_e_beam_eff->Fill(W_ferm,1.);
 };
-       
   
 //  W_tmp = W;
 // W = 1.6125;
@@ -577,7 +585,6 @@ sigma_sf_final = 0.;
 };
 
 
-
 //calculating sigma_total from different sigmas, eps_l and eps_t
 Float_t eps_l,eps_t,nu_g,theta_el;
 
@@ -626,7 +633,7 @@ sigma_total = sigma_total*V_flux;
 };
 
 
-if ((flag_flux==1)&&(flag_fermi == 1)){
+if ((flag_flux == 1)&&(flag_fermi == 1)){
 nu_g = (W*W + Q2 - MP*MP)/2./MP;
 theta_el = acos(1.- Q2/E_beam_fermi/(E_beam_fermi - nu_g)/2.);
 eps_t = 1./(1.+ 2.*(1. + nu_g*nu_g/Q2)*tan(theta_el/2.)*tan(theta_el/2.));
@@ -722,6 +729,5 @@ hist_write();
  };
   }; */
 
- 
-  return 0;
-}
+
+};

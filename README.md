@@ -47,14 +47,9 @@ It should compile on ifarms.
 
 The generator supports two options for taking the input parameters:
 
-1) As a cin stream from a certain input file. To use this option run as "./twopeg < inp1", where inp1 is in the same directory and contains input parameters with comments. 
+1) As a cin stream from a certain input file. To use this option run as "./twopeg < inp1", where "inp1" is in the same directory and contains input parameters with comments. 
 
-2) The command line input is also supported. For this option all input parameters are automatically taken from "data/inp_cmd_line". The EG can then be run as "./twopeg a", where "a" is any charachter. The following command line options are also avaliable:
-
-"--trig <value>" resets the number of events to the specified value,
-
-"--seed <value>" sets the random seed to the specified value. If the option is not used, the EG takes the random seed from time(NULL).
-
+2) The command line input is also supported. The EG can then be run as "./twopeg a", where "a" is any charachter. The default values of input parameters are then used unless reset through the cmd line. For cmd line option and default values type "./twopeg --help".
 
 --------------------------------------------------
 
