@@ -11,8 +11,6 @@
 using namespace std;
 
 
-
-
 //-------
 Short_t getWbin (Float_t W) {
 //return int(W*10000. - 1.4125*10000.)/250;
@@ -42,14 +40,9 @@ if ((W>=1.7875)&&(W<=1.8125)) bin = 15;
 if ((W<1.4125)||(W>1.8125)) {
 cout << "Error, wrong W range, Ripani" << "\n";
 bin = -100;
-}
-
+};
 return bin;
 };
-
-//Short_t getWbin (Float_t Wgen, Float_t Wmax, Float_t Wmin) {
-//return Short_t((Wgen-Wmin)/0.025);
-//};
 
 //-------
 Short_t getQ2bin (Float_t Q2) {
@@ -62,7 +55,6 @@ if ((Q2 < 0.65) || (Q2 > 1.3)) {
 cout << "Error, wrong Q2 range, Ripani" << "\n";
 bin = -100;
 };
-
 return bin;
 };
 
@@ -87,8 +79,17 @@ if ((anglegen >= 0.01) && (anglegen <= anglemax - 0.01)) bin = int((anglegen - 0
 return bin;
 };
 
+//This subroutine gets Ripani cross sections on the tabuted grid and interpolates them to a desired point within (W>=1.4125)&&(W<=1.8125)&&(Q2>=0.65)&&(Q2<=1.3)
+//This is the grid and xsect array for Ripani cross sections:
+// W_ARR[17];
+// Q2_ARR[3];
+// S12_ARR[12][17];
+// S23_ARR[12][17];
+// THETA_ARR[6]; 
+// ALPHA_ARR[6];
+// SIGMA_ARR[6][3][17][12][12][6][6];
 
-//This subrouting is doing the following:
+//The subrouting is doing the following:
 //1 - using auxiliary functions (getWbin, getQ2bin, getsbin, getanglebin) we identify the number of left and right point 
 //2 - then we are doing 4d-interpolation for each (Wleft_bin, Q2_left_bin),  (Wright_bin, Q2_left_bin), (Wright_bin, Q2_right_bin) and (Wleft_bin, Q2_right_bin) and obtain cross-secton in that points (4 GLOBAL 6dim arrays)
 //3 - then we are doing 2d-interpolation for the points written above and obtain sigma_final[6]
@@ -100,7 +101,7 @@ void get_xsect_ripani(Float_t Q2gen, Float_t Wgen, Float_t s12gen,Float_t s23gen
 //using auxiliary functions (getWbin, getQ2bin, getsbin, getanglebin) we identify the number of left and right point 
 Short_t Wleft_bin = getWbin(Wgen);
 Short_t Wright_bin = Wleft_bin+1;
-//cout << getWbin(1.8125) << " b \n"; 
+
 //cout << Wgen <<" "<< Wleft_bin << " " <<Wright_bin <<"\n";
 
 Short_t Q2left_bin = getQ2bin(Q2gen);
@@ -142,10 +143,7 @@ interpol(4,Q2right_bin,Wright_bin,s12left_wright_bin,s12right_wright_bin,s23left
 interpol(4,Q2right_bin,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wleft_q2right[i],i);
 
 interpol(4,Q2left_bin,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wleft_q2left[i],i);
-
 };
-
-
 
 
 //cout <<sigma_wleft_q2left[0] <<"  qqgett\n";
@@ -167,7 +165,7 @@ interpol(2,0,0, Wleft_bin, Wright_bin, Q2left_bin, Q2right_bin, 0,  0, 0,  0, Wg
  sigma_cf_final = sigma_final[4];
  sigma_sf_final = sigma_final[5];
 
- return;
+
 };
 
 

@@ -33,7 +33,6 @@ return eps_t;
 };
 
 
-
 //-------------------------------------------------------------------------
 Float_t func_sigma_t (Float_t  x, Short_t wbin) {
 Float_t func = pow((x+FIT_PARAM_SIGMA_T[0][wbin]), FIT_PARAM_SIGMA_T[1][wbin])*FIT_PARAM_SIGMA_T[2][wbin]+FIT_PARAM_SIGMA_T[3][wbin];
@@ -48,10 +47,13 @@ if (i==4) func =  FIT_PARAM_SIGMA_CF[2][wbin]*x*x + FIT_PARAM_SIGMA_CF[1][wbin]*
 return func;
 };
 
+//This subroutine estimates cross section in the region (W>=1.6125)&&(W<=1.8125)&&(Q2>around 0)&&(Q2<0.65)
+//First, it takes Ripani xsect for Q2 = 0.65 GeV^{2} (Q2_bin = 0) for Wleft_bin and Wright_bin
+//Then it scales all sigma[0 to 6] to Q2 = zero with particular scaling functions and performs their W-interpolation
+//After that it takes Golovach photoproduction cross sections for Wright_bin and Wleft_bin and scales them with Q2 (only sigma_t). Their W interpolation is also performed.
+//Then mixing of scaled Ripani sigma_t and scaled Golovach sigma_t takes place
 
-
-
-void get_xsect_14_18_lowq2_fit(Float_t Q2gen, Float_t Wgen, Float_t s12gen,Float_t s23gen, Float_t thetagen, Float_t alphagen, Float_t phigen,Float_t &sigma_t_final, Float_t &sigma_l_final,Float_t  &sigma_c2f_final,Float_t  &sigma_s2f_final,Float_t &sigma_cf_final,Float_t  &sigma_sf_final){
+void get_xsect_w16_18_lowq2_fit(Float_t Q2gen, Float_t Wgen, Float_t s12gen,Float_t s23gen, Float_t thetagen, Float_t alphagen, Float_t phigen,Float_t &sigma_t_final, Float_t &sigma_l_final,Float_t  &sigma_c2f_final,Float_t  &sigma_s2f_final,Float_t &sigma_cf_final,Float_t  &sigma_sf_final){
 
 
 //using auxiliary functions (getWbin, getQ2bin, getsbin, getanglebin) we identify the number of left and right point 
@@ -93,11 +95,10 @@ Float_t sigma_wright[6],sigma_wleft[6];
 for (Short_t i=0;i<6;i++){
 interpol(4,Q2_bin,Wright_bin,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wright[i],i);
 
-
 interpol(4,Q2_bin,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wleft[i],i);
 };
-//Here we Q2-scale sigma_t, sigma_t, sigma_c2f and sigma_cf with the fit_functions (func_sigma_t and corresponding pol2) for Wright_bin and Wleft_bin
 
+//Here we Q2-scale sigma_t, sigma_t, sigma_c2f and sigma_cf with the fit_functions (func_sigma_t and corresponding pol2) for Wright_bin and Wleft_bin
 
 //sigma_t
 sigma_wright[0] = sigma_wright[0]*func_sigma_t(Q2gen,Wright_bin)/func_sigma_t(0.65,Wright_bin);
@@ -148,30 +149,27 @@ sigma_wleft[3] = sigma_wleft[3]*Func_q2_dep(Q2gen)/Func_q2_dep(0.65);
 sigma_wleft[5] = sigma_wleft[5]*Func_q2_dep(Q2gen)/Func_q2_dep(0.65);
 
 
-
 //We are doing 1dim linear W-interpolation
 for (Short_t i=0;i<6;i++){
 sigma_final[i] = 1./fabs(W_ARR[Wright_bin]-W_ARR[Wleft_bin]);
 sigma_final[i] = sigma_final[i]*(sigma_wright[i]*fabs(W_ARR[Wleft_bin]-Wgen)+sigma_wleft[i]*fabs(W_ARR[Wright_bin]-Wgen));
-
-
 };
 
 
 //We get explicitly different sigmas from the array
- sigma_t_final = sigma_final[0];
- sigma_l_final = sigma_final[1];
- sigma_c2f_final = sigma_final[2];
- sigma_s2f_final = sigma_final[3];
- sigma_cf_final = sigma_final[4];
- sigma_sf_final = sigma_final[5];
+sigma_t_final = sigma_final[0];
+sigma_l_final = sigma_final[1];
+sigma_c2f_final = sigma_final[2];
+sigma_s2f_final = sigma_final[3];
+sigma_cf_final = sigma_final[4];
+sigma_sf_final = sigma_final[5];
 Float_t sigma_t_gol;
 
 
-//Here we Q2-scale photoproduction Golovach cross sections (only sigma_t)
+//Here we take Golovach photoproduction cross sections for Wright and Wleft and scale them with Q2  (only sigma_t)
 if ((Wgen>=1.6125)&&(Wgen<=1.8125)) {
  
-  get_xsect_golovach(Wgen, s12gen,s23gen, thetagen, alphagen, w_left_bin_gol, sigma_t_wright_gol,sigma_t_wleft_gol );
+get_xsect_gol_datamod(Wgen, s12gen,s23gen, thetagen, alphagen, w_left_bin_gol, sigma_t_wright_gol,sigma_t_wleft_gol );
  
 A_tmp[0] = 75.002141;
 A_tmp[1] = 73.512912;
@@ -182,8 +180,6 @@ A_tmp[5] = 65.2;
 A_tmp[6] = 60.77;
 A_tmp[7] = 58.02;
 A_tmp[8] = 57.32;
-
-
 
 //cout <<Wgen<<" "<< sigma_t_wright_gol << " "<<sigma_t_wleft_gol<<"\n";
 
@@ -196,7 +192,7 @@ sigma_t_wright_gol = sigma_t_wright_gol*func_sigma_t(Q2gen,Wright_bin)/A_tmp[Wri
 sigma_t_wleft_gol = sigma_t_wleft_gol*func_sigma_t(Q2gen,Wleft_bin)/A_tmp[Wleft_bin-8];
 //};
 
-//1dim W-interpolation
+//1dim W-interpolation of scalecd Golovach sigma_t
 sigma_t_gol = 1./fabs(W_ARR[Wright_bin]-W_ARR[Wleft_bin]);
 sigma_t_gol = sigma_t_gol*(sigma_t_wright_gol*fabs(W_ARR[Wleft_bin]-Wgen)+sigma_t_wleft_gol*fabs(W_ARR[Wright_bin]-Wgen));
 
@@ -206,9 +202,6 @@ sigma_t_final = (Q2gen-0.0003)/0.65*sigma_t_final + (0.65-Q2gen)/0.65*sigma_t_go
 };
 
 
-
-
- return;
 };
 
 

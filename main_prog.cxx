@@ -47,14 +47,12 @@
 #include "get_xsect_near_threshold.h"
 
 #include "get_xsect_golovach.h"
-#include "get_xsect_gol2.h"
 #include "get_xsect_fedotov.h"
 #include "get_xsect_rip_fed_join.h"
-#include "get_xsect_14_18_lowq2_fit.h"
-#include "get_xsect_scale_gol_18_25.h"
-#include "get_xsect_q2_130_w_gt_18_lt_21.h"
-#include "get_xsect_25_30.h"
-#include "get_xsect_q2_13_wgt_3.h"
+#include "get_xsect_w16_18_lowq2_fit.h"
+#include "get_xsect_w18_25.h"
+#include "get_xsect_w25_30.h"
+#include "get_xsect_w30_45.h"
 #include "interpol_int.h"
 #include "radcorr.h"
 #include "fermi_bonn.h"
@@ -426,7 +424,7 @@ get_xsect_ripani(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr, sigma_t_final, sig
 };
 
 if ((W>=1.6125)&&(W<=1.8125)&&(Q2>0.000001)&&(Q2<0.65)) {
-get_xsect_14_18_lowq2_fit(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr, sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final);
+get_xsect_w16_18_lowq2_fit(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr, sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final);
 };
 
 if (((W>=1.3125)&&(W<=1.4375)&&(Q2>0.275)&&(Q2<0.575))||((W>=1.4125)&&(W<=1.4875)&&(Q2>0.275)&&(Q2<0.525))||((W>=1.4125)&&(W<=1.5125)&&(Q2>0.275)&&(Q2<0.425))||((W>=1.4125)&&(W<=1.5375)&&(Q2>0.225)&&(Q2<0.375))||((W>=1.4125)&&(W<=1.5625)&&(Q2>0.225)&&(Q2<0.275))){
@@ -435,25 +433,23 @@ if (((W>=1.3125)&&(W<=1.4375)&&(Q2>0.275)&&(Q2<0.575))||((W>=1.4125)&&(W<=1.4875
 
  if (((W>=1.4125)&&(W<=1.4375)&&(Q2>=0.575)&&(Q2<=0.65))||((W>=1.4375)&&(W<=1.4875)&&(Q2>=0.525)&&(Q2<=0.65))||((W>=1.4875)&&(W<=1.5125)&&(Q2>=0.425)&&(Q2<=0.65))||((W>=1.5125)&&(W<=1.5375)&&(Q2>=0.325)&&(Q2<=0.65))||((W>=1.5375)&&(W<=1.5625)&&(Q2>=0.275)&&(Q2<=0.65))||((W>=1.5625)&&(W<=1.5875)&&(Q2>=0.225)&&(Q2<=0.65))||((W>=1.3125)&&(W<1.4125)&&(Q2>=0.575)&&(Q2<=1.3))||((W>=1.3125)&&(W<1.5125)&&(Q2>=0.0002)&&(Q2<=0.275))||((W>=1.5125)&&(W<=1.5875)&&(Q2>=0.0002)&&(Q2<=0.225))){
 get_xsect_rip_fed_join(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final); 
- };
- 
+};
 
 if ((W>=1.2375)&&(W<1.3125)&&(Q2>0.00002)&&(Q2<1.3)) {
 get_xsect_near_threshold(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
 };
 
-
 if ((W>=1.8375)&&(W<=2.5375)&&(Q2>0.00002)&&(Q2<1.3)) {
-get_xsect_q2_130_w_gt_18_lt_21(E_beam,Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
+get_xsect_w18_25(E_beam,Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
 };
 
 if ((W>=2.5875)&&(W<=3.0375)&&(Q2>0.00002)&&(Q2<1.3)) {
-get_xsect_25_30(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
+get_xsect_w25_30(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
 };
 
 
 if ((W>=1.5875)&&(W<=1.6125)&&(Q2>0.00001)&&(Q2<0.65)) {
-get_xsect_14_18_lowq2_fit(Q2, 1.6125, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
+get_xsect_w16_18_lowq2_fit(Q2, 1.6125, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
 
 get_xsect_rip_fed_join(Q2,1.5875, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1); 
  
@@ -479,11 +475,11 @@ sigma_sf_final = sigma_sf_final*(sigma_sf_final_2*fabs(1.5875-W)+sigma_sf_final_
 
 if ((W>=1.8125)&&(W<=1.8375)&&(Q2>0.00002)&&(Q2<=1.3)) {
 
-if ((Q2>0.00002)&&(Q2<=0.65)) get_xsect_14_18_lowq2_fit(Q2, 1.8125, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
+if ((Q2>0.00002)&&(Q2<=0.65)) get_xsect_w16_18_lowq2_fit(Q2, 1.8125, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
 
 if ((Q2>0.65)&&(Q2<=1.3)) get_xsect_ripani(Q2, 1.8125, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
 
-get_xsect_q2_130_w_gt_18_lt_21(E_beam,Q2, 1.8375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1); 
+get_xsect_w18_25(E_beam,Q2, 1.8375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1); 
 
 sigma_t_final = 1./0.025;
 sigma_t_final = sigma_t_final*(sigma_t_final_2*fabs(1.8375-W)+sigma_t_final_1*fabs(1.8125-W));
@@ -507,9 +503,9 @@ sigma_sf_final = sigma_sf_final*(sigma_sf_final_2*fabs(1.8375-W)+sigma_sf_final_
 
 
 if ((W>=2.5375)&&(W<=2.5875)&&(Q2>0.00001)&&(Q2<1.3)) {
-get_xsect_q2_130_w_gt_18_lt_21(E_beam,Q2, 2.5375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
+get_xsect_w18_25(E_beam,Q2, 2.5375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2,sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
 
-get_xsect_25_30(Q2,2.5875, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1); 
+get_xsect_w25_30(Q2,2.5875, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1); 
  
 sigma_t_final = 1./0.05;
 sigma_t_final = sigma_t_final*(sigma_t_final_2*fabs(2.5875-W)+sigma_t_final_1*fabs(2.5375-W));
@@ -532,14 +528,14 @@ sigma_sf_final = sigma_sf_final*(sigma_sf_final_2*fabs(2.5875-W)+sigma_sf_final_
 
 
  if ((W>=3.1375)&&(W<=4.5375)&&(Q2>0.00001)&&(Q2<1.3)) {
-get_xsect_q2_13_wgt_3(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
+get_xsect_w30_45(Q2, W, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final, sigma_l_final, sigma_c2f_final,sigma_s2f_final,sigma_cf_final,sigma_sf_final );
 };
 
 if ((W>=3.0375)&&(W<=3.1375)&&(Q2>0.00001)&&(Q2<1.3)) {
 
-get_xsect_25_30(Q2,3.0375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2, sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
+get_xsect_w25_30(Q2,3.0375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_2, sigma_l_final_2, sigma_c2f_final_2,sigma_s2f_final_2,sigma_cf_final_2,sigma_sf_final_2);
 
-get_xsect_q2_13_wgt_3(Q2, 3.1375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1 );
+get_xsect_w30_45(Q2, 3.1375, s12,s23, th_hadr, alph_hadr, ph_hadr,sigma_t_final_1, sigma_l_final_1, sigma_c2f_final_1,sigma_s2f_final_1,sigma_cf_final_1,sigma_sf_final_1 );
 
 
 sigma_t_final = 1./0.1;

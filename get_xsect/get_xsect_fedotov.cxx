@@ -10,10 +10,7 @@
 
 using namespace std;
 
-
 Short_t getWbin_fed (Float_t W) {
-//return int(W*10000. - 1.4125*10000.)/250;
-//return int((W-1.4125)/0.025);
 Short_t bin;
 
 if ((W>=1.3125)&&(W<=1.3375)) bin = 0;
@@ -51,7 +48,6 @@ if ((Q2 < 0.225) || (Q2 > 0.575)) {
 cout << "Error, wrong Q2 range, Fedotov" << "\n";
 bin = -100;
 };
-
 return bin;
 };
 
@@ -78,9 +74,17 @@ return bin;
 };
 
 
+//This subroutine gets Fedotov cross sections on the tabuted grid and interpolates them to a desired point within the region covered by Fedotov cross section
+//This is the grid and xsect array for Fedotov cross sections:
+//W_ARR_FED[12];
+//Q2_ARR_FED[7];
+//S12_ARR_FED[10][12];
+//S23_ARR_FED[10][12];
+//THETA_ARR_FED[8]; 
+//ALPHA_ARR_FED[8];
+//SIGMA_ARR_FED[6][7][12][10][10][8][8];
 
-
-//This subrouting is doing the following:
+//The subrouting is doing the following:
 //1 - using auxiliary functions (getWbin, getQ2bin, getsbin, getanglebin) we identify the number of left and right point 
 //2 - then we are doing 4d-interpolation for each (Wleft_bin, Q2_left_bin),  (Wright_bin, Q2_left_bin), (Wright_bin, Q2_right_bin) and (Wleft_bin, Q2_right_bin) and obtain cross-secton in that points (4 GLOBAL 6dim arrays)
 //3 - then we are doing 2d-interpolation for the points written above and obtain sigma_final[6]
@@ -132,12 +136,12 @@ interpol_fedotov(4,Q2right_bin,Wright_bin,s12left_wright_bin,s12right_wright_bin
 interpol_fedotov(4,Q2right_bin,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wleft_q2right[i],i);
 
 interpol_fedotov(4,Q2left_bin,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wleft_q2left[i],i);
-
 };
 
 for (Short_t i=0;i<6;i++){
 interpol_fedotov(2,0,0, Wleft_bin, Wright_bin, Q2left_bin, Q2right_bin, 0,  0, 0,  0, Wgen, Q2gen, 0., 0.,sigma_final[i], i);
 };
+
 //We get explicitly different sigmas from the array
  sigma_t_final = sigma_final[0];
  sigma_l_final = sigma_final[1];
@@ -145,6 +149,5 @@ interpol_fedotov(2,0,0, Wleft_bin, Wright_bin, Q2left_bin, Q2right_bin, 0,  0, 0
  sigma_s2f_final = sigma_final[3];
  sigma_cf_final = sigma_final[4];
  sigma_sf_final = sigma_final[5];
-
 
 };

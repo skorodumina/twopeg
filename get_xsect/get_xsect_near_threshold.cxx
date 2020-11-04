@@ -9,7 +9,7 @@
 #include "interpol_fedotov.h"
 #include "get_xsect_fedotov.h"
 #include "get_xsect_rip_fed_join.h"
-#include "get_xsect_14_18_lowq2_fit.h"
+#include "get_xsect_w16_18_lowq2_fit.h"
 #include "interpol_int.h"
 using namespace std;
 
@@ -28,9 +28,18 @@ bin = -100;
 return bin;
 };
 
+//This subroutine estimates cross section near the threshold: in the region from 1.2375 to 1.3125 GeV (at the left of the Fedotov's coverage)
+//This is the grid and xsect array for near-the-threshold cross sections:
+//W_ARR_FED_THRESH[3];
+//S12_ARR_FED_THRESH[10][3];
+//S23_ARR_FED_THRESH[10][3];
+//THETA_ARR_FED[8]; 
+//ALPHA_ARR_FED[8];
+//SIGMA_ARR_FED_THRESH[6][7][3][10][10][8][8];
 
 
 void get_xsect_near_threshold(Float_t Q2gen, Float_t Wgen, Float_t s12gen,Float_t s23gen, Float_t thetagen, Float_t alphagen, Float_t phigen, Float_t &sigma_t_final, Float_t &sigma_l_final,Float_t  &sigma_c2f_final,Float_t  &sigma_s2f_final,Float_t &sigma_cf_final,Float_t  &sigma_sf_final ){
+
 Float_t sigma_wr_fed[6];
 Float_t sigma_wl_fed[6];
 
@@ -45,17 +54,13 @@ Short_t Wright_bin = Wleft_bin+1;
 Short_t Q2left_bin,Q2right_bin ;
 
 
-Short_t  s12left_wleft_bin,s12right_wleft_bin,s12left_wright_bin,s12right_wright_bin,s23left_wleft_bin ,s23right_wleft_bin,s23left_wright_bin,s23right_wright_bin;
+Short_t  s12left_wleft_bin,s12right_wleft_bin,s12left_wright_bin,s12right_wright_bin,s23left_wleft_bin,s23right_wleft_bin,s23left_wright_bin,s23right_wright_bin;
 
- s12left_wleft_bin = getsbin_fed(Wleft_bin, s12gen, S12_ARR_FED_THRESH[9][Wleft_bin], S12_ARR_FED_THRESH[0][Wleft_bin]);
- s12right_wleft_bin = s12left_wleft_bin +1;
+s12left_wleft_bin = getsbin_fed(Wleft_bin, s12gen, S12_ARR_FED_THRESH[9][Wleft_bin], S12_ARR_FED_THRESH[0][Wleft_bin]);
+s12right_wleft_bin = s12left_wleft_bin +1;
 
-
-
- s23left_wleft_bin = getsbin_fed(Wleft_bin, s23gen, S23_ARR_FED_THRESH[9][Wleft_bin], S23_ARR_FED_THRESH[0][Wleft_bin]);
- s23right_wleft_bin = s23left_wleft_bin +1;
-
-
+s23left_wleft_bin = getsbin_fed(Wleft_bin, s23gen, S23_ARR_FED_THRESH[9][Wleft_bin], S23_ARR_FED_THRESH[0][Wleft_bin]);
+s23right_wleft_bin = s23left_wleft_bin +1;
 
 
 Short_t thetaleft_bin = getanglebin_fed(thetagen,THETA_ARR_FED[7]);
@@ -66,20 +71,18 @@ Short_t alpharight_bin = alphaleft_bin+1;
 
 Float_t sigma_final[6];
 
-
 if ((Wgen>=1.2375)&&(Wgen<=1.3125)&&(Q2gen>0.275)&&(Q2gen<0.575)){
 
 if ((Wgen>=1.2375)&&(Wgen<=1.2875)){
 
- Q2left_bin = getQ2bin_fed(Q2gen);
- Q2right_bin = Q2left_bin+1;
+Q2left_bin = getQ2bin_fed(Q2gen);
+Q2right_bin = Q2left_bin+1;
 
-
- s12left_wright_bin = getsbin_fed(Wright_bin, s12gen, S12_ARR_FED_THRESH[9][Wright_bin], S12_ARR_FED_THRESH[0][Wright_bin]);
- s12right_wright_bin = s12left_wright_bin +1;
+s12left_wright_bin = getsbin_fed(Wright_bin, s12gen, S12_ARR_FED_THRESH[9][Wright_bin], S12_ARR_FED_THRESH[0][Wright_bin]);
+s12right_wright_bin = s12left_wright_bin +1;
  
 s23left_wright_bin = getsbin_fed(Wright_bin, s23gen, S23_ARR_FED_THRESH[9][Wright_bin], S23_ARR_FED_THRESH[0][Wright_bin]);
- s23right_wright_bin = s23left_wright_bin +1;
+s23right_wright_bin = s23left_wright_bin +1;
 
 for (Short_t i=0;i<6;i++){
 interpol_fedotov_thresh(4,Q2left_bin,Wright_bin,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wright_q2left[i],i);
@@ -96,13 +99,13 @@ interpol_fedotov_thresh(2,0,0, Wleft_bin, Wright_bin, Q2left_bin, Q2right_bin, 0
 
 
 if ((Wgen>=1.2875)&&(Wgen<=1.3125)){
- Q2left_bin = getQ2bin_fed(Q2gen);
- Q2right_bin = Q2left_bin+1;
- s12left_wright_bin = getsbin_fed(0, s12gen, S12_ARR_FED[9][0], S12_ARR_FED[0][0]);
- s12right_wright_bin = s12left_wright_bin +1;
+Q2left_bin = getQ2bin_fed(Q2gen);
+Q2right_bin = Q2left_bin+1;
+s12left_wright_bin = getsbin_fed(0, s12gen, S12_ARR_FED[9][0], S12_ARR_FED[0][0]);
+s12right_wright_bin = s12left_wright_bin +1;
  
- s23left_wright_bin = getsbin_fed(0, s23gen, S23_ARR_FED[9][0], S23_ARR_FED[0][0]);
- s23right_wright_bin = s23left_wright_bin +1;
+s23left_wright_bin = getsbin_fed(0, s23gen, S23_ARR_FED[9][0], S23_ARR_FED[0][0]);
+s23right_wright_bin = s23left_wright_bin +1;
  
 for (Short_t i=0;i<6;i++){
 interpol_fedotov(4,Q2left_bin,0,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wright_q2left[i],i);
@@ -136,10 +139,10 @@ if ((Wgen>=1.2375)&&(Wgen<=1.3125)&&(Q2gen>=0.0002)&&(Q2gen<=0.275)){
 if ((Wgen>=1.2375)&&(Wgen<=1.2875)){
 for (Short_t i=0;i<6;i++){
 s12left_wright_bin = getsbin_fed(Wright_bin, s12gen, S12_ARR_FED_THRESH[9][Wright_bin], S12_ARR_FED_THRESH[0][Wright_bin]);
- s12right_wright_bin = s12left_wright_bin +1;
+s12right_wright_bin = s12left_wright_bin +1;
  
 s23left_wright_bin = getsbin_fed(Wright_bin, s23gen, S23_ARR_FED_THRESH[9][Wright_bin], S23_ARR_FED_THRESH[0][Wright_bin]);
- s23right_wright_bin = s23left_wright_bin +1;
+s23right_wright_bin = s23left_wright_bin +1;
  
 interpol_fedotov_thresh(4,1,Wright_bin,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wr_fed[i],i);
 
@@ -151,18 +154,16 @@ interpol_fedotov_thresh(4,1,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23le
 
 if ((Wgen>=1.2875)&&(Wgen<=1.3125)){
 s12left_wright_bin = getsbin_fed(0, s12gen, S12_ARR_FED[9][0], S12_ARR_FED[0][0]);
- s12right_wright_bin = s12left_wright_bin +1;
+s12right_wright_bin = s12left_wright_bin +1;
  
- s23left_wright_bin = getsbin_fed(0, s23gen, S23_ARR_FED[9][0], S23_ARR_FED[0][0]);
- s23right_wright_bin = s23left_wright_bin +1;
+s23left_wright_bin = getsbin_fed(0, s23gen, S23_ARR_FED[9][0], S23_ARR_FED[0][0]);
+s23right_wright_bin = s23left_wright_bin +1;
 
 for (Short_t i=0;i<6;i++){
 interpol_fedotov(4,1,0,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wr_fed[i],i);
 
 interpol_fedotov_thresh(4,1,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wl_fed[i],i);
 };
-
-
 };
 
 sigma_wr_fed[0] = sigma_wr_fed[0]*func_sigma_t_fed(Q2gen,0)/func_sigma_t_fed(0.275,0);
@@ -172,7 +173,7 @@ sigma_wl_fed[0] = sigma_wl_fed[0]*func_sigma_t_fed(Q2gen,0)/func_sigma_t_fed(0.2
 sigma_wr_fed[1] = sigma_wr_fed[1]*pol2_fed(Q2gen,0,1)/pol2_fed(0.275,0,1);
 sigma_wr_fed[1] = sigma_wr_fed[1]*getEpsL(1.515,W_ARR_FED[2],0.275)/getEpsL(1.515,W_ARR_FED[2],Q2gen);
 
-////sigma_l
+//sigma_l
 //cout << "qqq2 "<< sigma_wl_fed[1] << "\n";
 sigma_wl_fed[1] = sigma_wl_fed[1]*pol2_fed(Q2gen,0,1)/pol2_fed(0.275,0,1);
 sigma_wl_fed[1] = sigma_wl_fed[1]*getEpsL(1.515,W_ARR_FED[2],0.275)/getEpsL(1.515,W_ARR_FED[2],Q2gen);
@@ -201,8 +202,6 @@ if ((Wgen>=1.2375)&&(Wgen<=1.2875)) sigma_final[i] = sigma_final[i]*(sigma_wr_fe
 };
 
 
-
-
 };// end if ((Wgen>=1.2375)&&(Wgen<=1.3125)&&(Q2gen>0.002)&&(Q2gen<0.275)){
 
 //-------------------------------------------------------------------------------
@@ -210,15 +209,13 @@ if ((Wgen>=1.2375)&&(Wgen<=1.2875)) sigma_final[i] = sigma_final[i]*(sigma_wr_fe
 
 if ((Wgen>=1.2375)&&(Wgen<1.3125)&&(Q2gen>=0.575)&&(Q2gen<=1.3)){
 
-
-
 if ((Wgen>=1.2375)&&(Wgen<=1.2875)){
 for (Short_t i=0;i<6;i++){
 s12left_wright_bin = getsbin_fed(Wright_bin, s12gen, S12_ARR_FED_THRESH[9][Wright_bin], S12_ARR_FED_THRESH[0][Wright_bin]);
- s12right_wright_bin = s12left_wright_bin +1;
+s12right_wright_bin = s12left_wright_bin +1;
  
 s23left_wright_bin = getsbin_fed(Wright_bin, s23gen, S23_ARR_FED_THRESH[9][Wright_bin], S23_ARR_FED_THRESH[0][Wright_bin]);
- s23right_wright_bin = s23left_wright_bin +1;
+s23right_wright_bin = s23left_wright_bin +1;
 
 interpol_fedotov_thresh(4,6,Wright_bin,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wr_fed[i],i);
 
@@ -228,10 +225,10 @@ interpol_fedotov_thresh(4,6,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23le
 
 if ((Wgen>=1.2875)&&(Wgen<=1.3125)){
 s12left_wright_bin = getsbin_fed(0, s12gen, S12_ARR_FED[9][0], S12_ARR_FED[0][0]);
- s12right_wright_bin = s12left_wright_bin +1;
+s12right_wright_bin = s12left_wright_bin +1;
  
- s23left_wright_bin = getsbin_fed(0, s23gen, S23_ARR_FED[9][0], S23_ARR_FED[0][0]);
- s23right_wright_bin = s23left_wright_bin +1;
+s23left_wright_bin = getsbin_fed(0, s23gen, S23_ARR_FED[9][0], S23_ARR_FED[0][0]);
+s23right_wright_bin = s23left_wright_bin +1;
 
 for (Short_t i=0;i<6;i++){
 interpol_fedotov(4,6,0,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin,s23right_wright_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wr_fed[i],i);
@@ -239,16 +236,7 @@ interpol_fedotov(4,6,0,s12left_wright_bin,s12right_wright_bin,s23left_wright_bin
 interpol_fedotov_thresh(4,6,Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_bin,s23right_wleft_bin,thetaleft_bin,thetaright_bin,alphaleft_bin,alpharight_bin,s12gen,s23gen,thetagen,alphagen,sigma_wl_fed[i],i);
 };
 
-
 };
-
-
-
-
-
-
-
-
 
 
 //Here we Q2-scale sigma_t, sigma_t, sigma_c2f and sigma_cf with the fit_functions (corresponding pol1) for Wright_bin and Wleft_bin
@@ -266,7 +254,6 @@ sigma_wl_fed[2] = sigma_wl_fed[2]*pol1_fed_0575_065(Q2gen,Wleft_bin,2)/pol1_fed_
 sigma_wr_fed[4] = sigma_wr_fed[4]*pol1_fed_0575_065(Q2gen,Wright_bin,4)/pol1_fed_0575_065(0.575,Wright_bin,4);
 sigma_wl_fed[4] = sigma_wl_fed[4]*pol1_fed_0575_065(Q2gen,Wleft_bin,4)/pol1_fed_0575_065(0.575,Wleft_bin,4);
 
-
 };
 
 if ((Q2gen>=0.65)&&(Q2gen<=0.95)){
@@ -274,11 +261,10 @@ if ((Q2gen>=0.65)&&(Q2gen<=0.95)){
 sigma_wr_fed[0] = sigma_wr_fed[0]*pol1_fed_0575_065(0.65,Wright_bin,0)/pol1_fed_0575_065(0.575,Wright_bin,0);
 sigma_wr_fed[0] = sigma_wr_fed[0]*pol1_fed_065_095(Q2gen,Wleft_bin,0)/pol1_fed_065_095(0.65,Wleft_bin,0);
 
-
 sigma_wl_fed[0] = sigma_wl_fed[0]*pol1_fed_0575_065(0.65,Wleft_bin,0)/pol1_fed_0575_065(0.575,Wleft_bin,0);
 sigma_wl_fed[0] = sigma_wl_fed[0]*pol1_fed_065_095(Q2gen,Wleft_bin,0)/pol1_fed_065_095(0.65,Wleft_bin,0);
 
-////sigma_l
+//sigma_l
 sigma_wr_fed[1] = sigma_wr_fed[1]*pol1_fed_0575_065(0.65,Wright_bin,1)/pol1_fed_0575_065(0.575,Wright_bin,1);
 sigma_wr_fed[1] = sigma_wr_fed[1]*pol1_fed_065_095(Q2gen,Wright_bin,1)/pol1_fed_065_095(0.65,Wright_bin,1);
 
@@ -299,9 +285,7 @@ sigma_wr_fed[4] = sigma_wr_fed[4]*pol1_fed_065_095(Q2gen,Wright_bin,4)/pol1_fed_
 sigma_wl_fed[4] = sigma_wl_fed[4]*pol1_fed_0575_065(0.65,Wleft_bin,4)/pol1_fed_0575_065(0.575,Wleft_bin,4);
 sigma_wl_fed[4] = sigma_wl_fed[4]*pol1_fed_065_095(Q2gen,Wleft_bin,4)/pol1_fed_065_095(0.65,Wleft_bin,4);
 
-
 };
-
 
 if ((Q2gen>=0.95)&&(Q2gen<=1.3)){
 
@@ -310,12 +294,11 @@ sigma_wr_fed[0] = sigma_wr_fed[0]*pol1_fed_0575_065(0.65,Wright_bin,0)/pol1_fed_
 sigma_wr_fed[0] = sigma_wr_fed[0]*pol1_fed_065_095(0.95,Wleft_bin,0)/pol1_fed_065_095(0.65,Wleft_bin,0);
 sigma_wr_fed[0] = sigma_wr_fed[0]*pol1_fed_095_130(Q2gen,Wright_bin,0)/pol1_fed_095_130(0.95,Wright_bin,0);
 
-
 sigma_wl_fed[0] = sigma_wl_fed[0]*pol1_fed_0575_065(0.65,Wleft_bin,0)/pol1_fed_0575_065(0.575,Wleft_bin,0);
 sigma_wl_fed[0] = sigma_wl_fed[0]*pol1_fed_065_095(0.95,Wleft_bin,0)/pol1_fed_065_095(0.65,Wleft_bin,0);
 sigma_wl_fed[0] = sigma_wl_fed[0]*pol1_fed_095_130(Q2gen,Wleft_bin,0)/pol1_fed_095_130(0.95,Wleft_bin,0);
 
-////sigma_l
+//sigma_l
 sigma_wr_fed[1] = sigma_wr_fed[1]*pol1_fed_0575_065(0.65,Wright_bin,1)/pol1_fed_0575_065(0.575,Wright_bin,1);
 sigma_wr_fed[1] = sigma_wr_fed[1]*pol1_fed_065_095(0.95,Wright_bin,1)/pol1_fed_065_095(0.65,Wright_bin,1);
 sigma_wr_fed[1] = sigma_wr_fed[1]*pol1_fed_095_130(Q2gen,Wright_bin,1)/pol1_fed_095_130(0.95,Wright_bin,1);
@@ -323,6 +306,7 @@ sigma_wr_fed[1] = sigma_wr_fed[1]*pol1_fed_095_130(Q2gen,Wright_bin,1)/pol1_fed_
 sigma_wl_fed[1] = sigma_wl_fed[1]*pol1_fed_0575_065(0.65,Wleft_bin,1)/pol1_fed_0575_065(0.575,Wleft_bin,1);
 sigma_wl_fed[1] = sigma_wl_fed[1]*pol1_fed_065_095(0.95,Wleft_bin,1)/pol1_fed_065_095(0.65,Wleft_bin,1);
 sigma_wl_fed[1] = sigma_wl_fed[1]*pol1_fed_095_130(Q2gen,Wleft_bin,1)/pol1_fed_095_130(0.95,Wleft_bin,1);
+
 //sigma_c2f
 sigma_wr_fed[2] = sigma_wr_fed[2]*pol1_fed_0575_065(0.65,Wright_bin,2)/pol1_fed_0575_065(0.575,Wright_bin,2);
 sigma_wr_fed[2] = sigma_wr_fed[2]*pol1_fed_065_095(0.95,Wright_bin,2)/pol1_fed_065_095(0.65,Wright_bin,2);
@@ -331,6 +315,7 @@ sigma_wr_fed[2] = sigma_wr_fed[2]*pol1_fed_095_130(Q2gen,Wright_bin,2)/pol1_fed_
 sigma_wl_fed[2] = sigma_wl_fed[2]*pol1_fed_0575_065(0.65,Wleft_bin,2)/pol1_fed_0575_065(0.575,Wleft_bin,2);
 sigma_wl_fed[2] = sigma_wl_fed[2]*pol1_fed_065_095(0.95,Wleft_bin,2)/pol1_fed_065_095(0.65,Wleft_bin,2);
 sigma_wl_fed[2] = sigma_wl_fed[2]*pol1_fed_095_130(Q2gen,Wleft_bin,2)/pol1_fed_095_130(0.95,Wleft_bin,2);
+
 //sigma_cf
 sigma_wr_fed[4] = sigma_wr_fed[4]*pol1_fed_0575_065(0.65,Wright_bin,4)/pol1_fed_0575_065(0.575,Wright_bin,4);
 sigma_wr_fed[4] = sigma_wr_fed[4]*pol1_fed_065_095(0.95,Wright_bin,4)/pol1_fed_065_095(0.65,Wright_bin,4);
@@ -340,10 +325,7 @@ sigma_wl_fed[4] = sigma_wl_fed[4]*pol1_fed_0575_065(0.65,Wleft_bin,4)/pol1_fed_0
 sigma_wl_fed[4] = sigma_wl_fed[4]*pol1_fed_065_095(0.95,Wleft_bin,4)/pol1_fed_065_095(0.65,Wleft_bin,4);
 sigma_wl_fed[4] = sigma_wl_fed[4]*pol1_fed_095_130(Q2gen,Wleft_bin,4)/pol1_fed_095_130(0.95,Wleft_bin,4);
 
-
-
 };
-
 
 //sigma_s2f
 sigma_wr_fed[3] = sigma_wr_fed[3]*Func_q2_dep(Q2gen)/Func_q2_dep(0.575); 
@@ -352,9 +334,6 @@ sigma_wl_fed[3] = sigma_wl_fed[3]*Func_q2_dep(Q2gen)/Func_q2_dep(0.575);
 //sigma_sf
 sigma_wr_fed[5] = sigma_wr_fed[5]*Func_q2_dep(Q2gen)/Func_q2_dep(0.575); 
 sigma_wl_fed[5] = sigma_wl_fed[5]*Func_q2_dep(Q2gen)/Func_q2_dep(0.575);
-
-
-
 
 //We are doing 1dim linear W-interpolation
 for (Short_t i=0;i<6;i++){
@@ -371,25 +350,12 @@ if ((Wgen>=1.2375)&&(Wgen<=1.2875)) sigma_final[i] = sigma_final[i]*(sigma_wr_fe
 
 };//end if ((Wgen>=1.3125)&&(Wgen<1.4125)&&(Q2gen>=0.575)&&(Q2gen<=1.3))
 
-
-
-
-
-
-
-
-
-
-
 //We get explicitly different sigmas from the array
-
-
 sigma_t_final = sigma_final[0];
 sigma_l_final = sigma_final[1];
 sigma_c2f_final = sigma_final[2];
 sigma_s2f_final = sigma_final[3];
 sigma_cf_final = sigma_final[4];
 sigma_sf_final = sigma_final[5];
-
 
 };
