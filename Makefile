@@ -52,5 +52,5 @@ clean:
 	rm -f G__*
 	rm -f interpol/*.o 
 	rm -f get_xsect/*.o 
-	rm twopeg twopeg_bos.exe
+	rm -f twopeg twopeg_bos.exe
 	
