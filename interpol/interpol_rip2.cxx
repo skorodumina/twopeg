@@ -8,6 +8,16 @@
 
 using namespace std;
 
+//This subroutine performs cross section interpolation for Q2 = 1.3 GeV^2 and W from 1.8375 to 2.5375 GeV (data-based up to W = 2.1 GeV and pure model for W from 2.1 to 2.5 GeV) 
+//This is the grid and xsect arrays for this cross sections:
+//W_ARR_RIP2[21];
+//S12_ARR_RIP2[12][21];
+//S23_ARR_RIP2[12][21];
+//THETA_ARR[6]; 
+//ALPHA_ARR[6];
+//SIGMA_ARR_RIP2[6][21][12][12][6][6];
+
+
 void interpol_rip2(Short_t dim,Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter, Short_t flag_sigma){
 
 if ((dim!=2)&&(dim!=4)) cout << "ERROR: wrong dim of interpolation \n";
@@ -27,7 +37,6 @@ Float_t  s12 = a;
 Float_t  s23 = b;
 Float_t  theta = c;
 Float_t  alpha = d;
-
 
 
 Float_t factor;
@@ -193,10 +202,10 @@ sigma_inter = sigma_inter*factor;
 if (dim==2){
 
 
-Short_t   Wleft_bin = a_l_bin;
-Short_t  Wright_bin = a_r_bin;
-Short_t  Q2left_bin = b_l_bin;
-Short_t  Q2right_bin = b_r_bin;
+Short_t Wleft_bin = a_l_bin;
+Short_t Wright_bin = a_r_bin;
+Short_t Q2left_bin = b_l_bin;
+Short_t Q2right_bin = b_r_bin;
 Float_t Wgen = a;
 Float_t Q2gen = b;
 
@@ -211,8 +220,6 @@ sigma_inter = sigma_inter + sigma_wleft_q2right[flag_sigma]*fabs(W_ARR_RIP2[Wrig
 sigma_inter = sigma_inter*factor;
 
 //cout <<sigma_wleft_q2left[0] <<"  qqint\n";
-
 };
 
- return;
 };

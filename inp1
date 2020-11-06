@@ -1,4 +1,4 @@
-10000000       // Number of events to be generated
+1000       // Number of events to be generated
 12      // Beam energy (GeV)
 1.1            // W minimum (GeV) 
 5.8           // Wmaximum (GeV)

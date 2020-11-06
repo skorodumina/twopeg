@@ -8,9 +8,16 @@
 
 using namespace std;
 
+//This subroutine performs interpolation of Golovach cross sections for W from 1.6125 to 2.5375 GeV (photoproduction)
+//This is the grid and xsect arrays for Golovach cross sections:
+//W_ARR_GOL[30];
+//S12_ARR_GOL[16][30];
+//S23_ARR_GOL[16][30];
+//THETA_ARR_GOL[14]; 
+//ALPHA_ARR_GOL[14];
+//SIGMA_ARR_GOL[30][16][16][14][14];
+
 void interpol_golovach(Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter){
-
-
 
 Short_t  s12_left_bin = a_l_bin;
 Short_t  s12_right_bin =  a_r_bin;
@@ -25,7 +32,6 @@ Float_t  s12 = a;
 Float_t  s23 = b;
 Float_t  theta = c;
 Float_t  alpha = d;
-
 
 
 Float_t factor;
@@ -179,13 +185,5 @@ sigma_tmp = sigma_tmp*fabs(ALPHA_ARR_GOL[alpha_right_bin]-alpha);
 sigma_inter = sigma_inter+sigma_tmp;
 
 sigma_inter = sigma_inter*factor;
-//cout << sigma_inter << " QWQWQW"<< "\n";
-//cout <<  s12_left_bin << " A "<< s12_right_bin <<" B "<<s23_left_bin <<" w " <<s23_right_bin <<" rt "<< theta_left_bin <<" "<<theta_right_bin <<" b "<<alpha_left_bin<<" "<< alpha_right_bin<<"\n";
-//if (sigma_inter>=1.) cout  <<SIGMA_ARR_GOL[Wbin][s23_left_bin][s12_right_bin][theta_right_bin][alpha_left_bin]<<"\n";
 
-
-
-
-
- return;
 };

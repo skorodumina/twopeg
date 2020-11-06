@@ -18,7 +18,6 @@ if ((W<1.2625)||(W>3.0125)) {
 cout <<"Error, wrong W-value, int cr.sect for radcor \n";
 bin = -100.; 
 };
-
 return bin;
 };
 
@@ -32,20 +31,15 @@ if ((Q2>1.2255)&&(Q2<1.3)) bin = 25;
 if  ((Q2<0.0005)||(Q2>1.3)) {
 cout <<"Error, wrong Q2-value, int cr.sect for radcor  \n";
 bin = -100.; 
-
 };
 return bin;
 };
-
-
 
 Float_t Func_q2_dep(Float_t Q2){
 return 1./(1.+Q2/0.7)/(1.+Q2/0.7);
 };
 
-
-
-
+//This subroutine performs interpolation of integral cross sections for rad effeects
 
 void interpol_int(Float_t Q2gen, Float_t Wgen,Float_t &sigma_t_int, Float_t &sigma_l_int){
 Float_t Q2_old; 
@@ -87,7 +81,6 @@ sigma_l_int = sigma_l_int + SIGMA_L_ARR_2pi_INT[Q2right_bin][Wleft_bin]*fabs(W_A
 sigma_l_int = sigma_l_int*factor;
 
 
-
 //cout << SIGMA_T_ARR_2pi_INT[Q2left_bin][Wleft_bin] << " "<< SIGMA_T_ARR_2pi_INT[Q2left_bin][Wright_bin] << " "<< SIGMA_T_ARR_2pi_INT[Q2right_bin][Wright_bin] << " "<< SIGMA_T_ARR_2pi_INT[Q2right_bin][Wleft_bin] <<" " <<sigma_t_int << "\n";
 
 if (Q2_old >1.29){
@@ -101,8 +94,8 @@ sigma_l_int = 0.;
 };
 
 
-Q2gen=Q2_old;
-Wgen=W_old;
+Q2gen = Q2_old;
+Wgen = W_old;
 
 };
 

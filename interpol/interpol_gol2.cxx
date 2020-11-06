@@ -8,10 +8,17 @@
 
 using namespace std;
 
-//Note that SIGMA_ARR_GOL2 is the same as SIGMA_ARR_RIP3, but with scaling coefficients (W, s12, 23, and angles dependent). Both SIGMA sets are taken from the model without relying on the data.
+//This subroutine performs the cross section interpolation for Q2 = 0 GeV^2 and W from 2.5875 to 3.0375 GeV (pure-model based)
+//This is the grid and xsect arrays for this cross sections:
+//W_ARR_RIP3[10];
+//S12_ARR_RIP3[16][10];
+//S23_ARR_RIP3[16][10];
+//THETA_ARR[6]; 
+//ALPHA_ARR[6];
+//SIGMA_ARR_GOL2[10][16][16][6][6]; (the same as sigma_t from SIGMA_ARR_RIP3[6][10][16][16][6][6], but with scaling factors, which are W, s12/s23, and angles dependent)
+
 
 void interpol_gol2(Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter){
-
 
 
 Short_t  s12_left_bin = a_l_bin;
@@ -27,7 +34,6 @@ Float_t  s12 = a;
 Float_t  s23 = b;
 Float_t  theta = c;
 Float_t  alpha = d;
-
 
 
 Float_t factor;
@@ -181,13 +187,5 @@ sigma_tmp = sigma_tmp*fabs(ALPHA_ARR[alpha_right_bin]-alpha);
 sigma_inter = sigma_inter+sigma_tmp;
 
 sigma_inter = sigma_inter*factor;
-//cout << sigma_inter << " QWQWQW"<< "\n";
-//cout <<  s12_left_bin << " A "<< s12_right_bin <<" B "<<s23_left_bin <<" w " <<s23_right_bin <<" rt "<< theta_left_bin <<" "<<theta_right_bin <<" b "<<alpha_left_bin<<" "<< alpha_right_bin<<"\n";
-//if (sigma_inter>=1.) cout  <<SIGMA_ARR_GOL[Wbin][s23_left_bin][s12_right_bin][theta_right_bin][alpha_left_bin]<<"\n";
 
-
-
-
-
- return;
 };

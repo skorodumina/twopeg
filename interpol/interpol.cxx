@@ -8,6 +8,17 @@
 
 using namespace std;
 
+//This subroutine performs interpolation of Ripani cross sections for (W>=1.4125)&&(W<=1.8125)&&(Q2>=0.65)&&(Q2<=1.3)
+//This is the grid and xsect arrays for Ripani cross sections:
+// W_ARR[17];
+// Q2_ARR[3];
+// S12_ARR[12][17];
+// S23_ARR[12][17];
+// THETA_ARR[6]; 
+// ALPHA_ARR[6];
+// SIGMA_ARR[6][3][17][12][12][6][6];
+
+
 void interpol(Short_t dim,Short_t Q2bin, Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter, Short_t flag_sigma){
 
 if ((dim!=2)&&(dim!=4)) cout << "ERROR: wrong dim of interpolation \n";
@@ -27,8 +38,6 @@ Float_t  s12 = a;
 Float_t  s23 = b;
 Float_t  theta = c;
 Float_t  alpha = d;
-
-
 
 Float_t factor;
 factor = 1./fabs(S12_ARR[s12_right_bin][Wbin]-S12_ARR[s12_left_bin][Wbin]);
@@ -189,7 +198,6 @@ sigma_inter = sigma_inter*factor;
 
 if (dim==2){
 
-
 Short_t   Wleft_bin = a_l_bin;
 Short_t  Wright_bin = a_r_bin;
 Short_t  Q2left_bin = b_l_bin;
@@ -210,5 +218,4 @@ sigma_inter = sigma_inter*factor;
 //cout <<sigma_wleft_q2left[0] <<"  qqint\n";
 };
 
- return;
 };

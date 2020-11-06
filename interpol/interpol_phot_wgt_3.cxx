@@ -8,6 +8,15 @@
 
 using namespace std;
 
+//This subroutine performs cross section interpolation for Q2 = 0 GeV^2 and W from 3.1375 to 4.5375 GeV (pure model-based) 
+//This is the grid and xsect arrays this cross sections:
+//W_ARR_gt_3[15];
+//S12_ARR_gt_3[16][15];
+//S23_ARR_gt_3[16][15];
+//THETA_ARR[6]; 
+//ALPHA_ARR[6];
+//SIGMA_ARR_phot_gt_3[15][16][16][6][6];,<---SIGMA_ARR_GOL2[10][16][16][6][6]; <--- sigma_t from SIGMA_ARR_RIP3[6][10][16][16][6][6];
+
 void interpol_phot_wgt_3(Short_t dim,Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter){
 
 if ((dim!=2)&&(dim!=4)) cout << "ERROR: wrong dim of interpolation \n";
@@ -27,7 +36,6 @@ Float_t  s12 = a;
 Float_t  s23 = b;
 Float_t  theta = c;
 Float_t  alpha = d;
-
 
 
 Float_t factor;
@@ -189,10 +197,7 @@ sigma_inter = sigma_inter*factor;
 };
 
 if (dim==2){
-
-
 cout << " no 2dim interpol here \n";
 };
 
- return;
 };

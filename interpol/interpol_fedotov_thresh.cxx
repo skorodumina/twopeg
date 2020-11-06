@@ -8,6 +8,16 @@
 
 using namespace std;
 
+//This subroutine performs cross section interpolation near the threshold: in the region from 1.2375 to 1.3125 GeV (at the left of the Fedotov's coverage)
+//This is the grid and xsect arrays for near-the-threshold cross sections:
+//W_ARR_FED_THRESH[3];
+//S12_ARR_FED_THRESH[10][3];
+//S23_ARR_FED_THRESH[10][3];
+//THETA_ARR_FED[8]; 
+//ALPHA_ARR_FED[8];
+//SIGMA_ARR_FED_THRESH[6][7][3][10][10][8][8];
+
+
 void interpol_fedotov_thresh(Short_t dim,Short_t Q2bin, Short_t Wbin, Short_t a_l_bin, Short_t a_r_bin, Short_t b_l_bin, Short_t b_r_bin, Short_t c_l_bin, Short_t c_r_bin,Short_t d_l_bin, Short_t d_r_bin,  Float_t a, Float_t b, Float_t c, Float_t d, Float_t &sigma_inter, Short_t flag_sigma){
 
 if ((dim!=2)&&(dim!=4)) cout << "ERROR: wrong dim of interpolation \n";
@@ -27,7 +37,6 @@ Float_t  s12 = a;
 Float_t  s23 = b;
 Float_t  theta = c;
 Float_t  alpha = d;
-
 
 
 Float_t factor;
@@ -189,7 +198,6 @@ sigma_inter = sigma_inter*factor;
 
 if (dim==2){
 
-
 Short_t   Wleft_bin = a_l_bin;
 Short_t  Wright_bin = a_r_bin;
 Short_t  Q2left_bin = b_l_bin;
@@ -209,5 +217,4 @@ sigma_inter = sigma_inter*factor;
 
 };
 
- return;
 };
