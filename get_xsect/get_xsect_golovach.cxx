@@ -94,12 +94,12 @@ if ((anglegen >= 0.01) && (anglegen <= anglemax - 0.01)) bin = int((anglegen - 0
 return bin;
 };
 
-//This file contains two similar subroutine for geting photoprofuction cross sections.
+//This file contains two similar subroutine for geting photoproduction cross sections.
 //get_xsect_gol_datamod(...) - gets Golovach cross sections for W from 1.6125 to 2.5375 GeV
 //get_xsect_gol_model(...) - takes cross sections in the region W from 2.5875 to 3.0375 GeV and Q2 = 0 GeV^2 (pure-model based)
 
 //This subroutine gets Golovach cross sections on the tabuted grid and interpolates them to a desired point within W from 1.6125 to 2.5375 GeV
-//This is the grid and xsect array for Golovach cross sections:
+//This is the grid and xsect arrays for Golovach cross sections:
 //W_ARR_GOL[30];
 //S12_ARR_GOL[16][30];
 //S23_ARR_GOL[16][30];
@@ -147,13 +147,13 @@ interpol_golovach(Wleft_bin,s12left_wleft_bin,s12right_wleft_bin,s23left_wleft_b
 
 
 //This subroutine takes cross sections in the region W from 2.5875 to 3.0375 GeV and Q2 = 0 GeV^2 (pure-model based)
-//This is the grid and xsect array for this cross sections:
+//This is the grid and xsect arrays for this cross sections:
 //W_ARR_RIP3[10];
 //S12_ARR_RIP3[16][10];
 //S23_ARR_RIP3[16][10];
 //THETA_ARR[6]; 
 //ALPHA_ARR[6];
-//SIGMA_ARR_GOL2[10][16][16][6][6]; (the same as SIGMA_ARR_RIP3[6][10][16][16][6][6], but with scaling factors, which are W, s12/s23, and angles dependent)
+//SIGMA_ARR_GOL2[10][16][16][6][6]; (the same as sigma_t from SIGMA_ARR_RIP3[6][10][16][16][6][6], but with scaling factors, which are W, s12/s23, and angles dependent)
 
 void get_xsect_gol_model(Float_t Wgen, Float_t s12gen,Float_t s23gen, Float_t thetagen, Float_t alphagen, Short_t &Wleft_bin, Float_t &sigma_wright_gol,Float_t &sigma_wleft_gol){ 
 

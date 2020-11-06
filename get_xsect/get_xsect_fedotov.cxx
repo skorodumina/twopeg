@@ -75,7 +75,7 @@ return bin;
 
 
 //This subroutine gets Fedotov cross sections on the tabuted grid and interpolates them to a desired point within the region covered by Fedotov cross section
-//This is the grid and xsect array for Fedotov cross sections:
+//This is the grid and xsect arrays for Fedotov cross sections:
 //W_ARR_FED[12];
 //Q2_ARR_FED[7];
 //S12_ARR_FED[10][12];

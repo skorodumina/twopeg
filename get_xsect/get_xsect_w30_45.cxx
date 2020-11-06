@@ -55,14 +55,14 @@ return bin;
 
 //This subroutine estimates cross section in the region (W>=3.1375)&&(W<=4.5375)&&(Q2>around 0)&&(Q2<1.3)
 //STEP 1-2. The subroutine takes cross sections for Q2 = 1.3 GeV^2 and then for Q2 = 0 GeV^2 (both pure model-based) 
-//This is the grid and xsect array for both cross section sets:
+//This is the grid and xsect arrays for both cross section sets:
 //W_ARR_gt_3[15];
 //S12_ARR_gt_3[16][15];
 //S23_ARR_gt_3[16][15];
 //THETA_ARR[6]; 
 //ALPHA_ARR[6];
-//SIGMA_ARR_gt_3[6][15][16][16][6][6]; <---SIGMA_ARR_RIP3[6][10][16][16][6][6];
-//SIGMA_ARR_phot_gt_3[15][16][16][6][6];,<---SIGMA_ARR_GOL2[10][16][16][6][6];<---SIGMA_ARR_RIP3[6][10][16][16][6][6];
+//SIGMA_ARR_gt_3[6][15][16][16][6][6]; <--- SIGMA_ARR_RIP3[6][10][16][16][6][6];
+//SIGMA_ARR_phot_gt_3[15][16][16][6][6];,<--- SIGMA_ARR_GOL2[10][16][16][6][6]; <--- sigma_t from SIGMA_ARR_RIP3[6][10][16][16][6][6];
 
 
 //STEP 3. The aforementioned two cross section sets are scaled and mixed together. Scaling and mixing is specific to different Q2 ranges and different sigmas.

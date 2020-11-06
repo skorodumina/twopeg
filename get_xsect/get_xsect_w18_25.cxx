@@ -51,7 +51,7 @@ return bin;
 
 //This subroutine estimates cross section in the region (W>=1.8375)&&(W<=2.5375)&&(Q2>around 0)&&(Q2<1.3)
 //STEP 1. The subroutine takes cross sections for Q2 = 1.3 GeV^2 (data-based up to W = 2.1 GeV and pure model for W from 2.1 to 2.5 GeV) 
-//This is the grid and xsect array for cross sections at Q2 = 1.3 GeV^2:
+//This is the grid and xsect arrays for cross sections at Q2 = 1.3 GeV^2:
 //W_ARR_RIP2[21];
 //S12_ARR_RIP2[12][21];
 //S23_ARR_RIP2[12][21];

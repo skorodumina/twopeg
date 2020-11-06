@@ -29,7 +29,7 @@ return bin;
 };
 
 //This subroutine estimates cross section near the threshold: in the region from 1.2375 to 1.3125 GeV (at the left of the Fedotov's coverage)
-//This is the grid and xsect array for near-the-threshold cross sections:
+//This is the grid and xsect arrays for near-the-threshold cross sections:
 //W_ARR_FED_THRESH[3];
 //S12_ARR_FED_THRESH[10][3];
 //S23_ARR_FED_THRESH[10][3];

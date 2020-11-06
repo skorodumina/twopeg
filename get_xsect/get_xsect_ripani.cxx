@@ -80,7 +80,7 @@ return bin;
 };
 
 //This subroutine gets Ripani cross sections on the tabuted grid and interpolates them to a desired point within (W>=1.4125)&&(W<=1.8125)&&(Q2>=0.65)&&(Q2<=1.3)
-//This is the grid and xsect array for Ripani cross sections:
+//This is the grid and xsect arrays for Ripani cross sections:
 // W_ARR[17];
 // Q2_ARR[3];
 // S12_ARR[12][17];
