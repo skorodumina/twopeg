@@ -406,15 +406,13 @@ Q2nodata = Q2;
 if (Q2 > 1.299)Q2 = 1.299;
 if (Q2 < 0.0005)Q2 = 0.0005;
 
-if (W<1.2375){
-
 sigma_t_final = 0.;
 sigma_l_final = 0.;
 sigma_c2f_final = 0.;
 sigma_s2f_final = 0.;
 sigma_cf_final = 0.;
 sigma_sf_final = 0.;
-};
+
 
 //Getting cross section in given generated (W, Q2, s12, s23, theta, alpha)-point
 sigma_total = 0.;
@@ -571,7 +569,7 @@ sigma_sf_final = sigma_sf_final*Func_q2_dep(Q2nodata)/Func_q2_dep(1.299);
 
 Q2 = Q2nodata;
 
-if (W < 1.2375){
+if ((W < 1.2375)||(W > 4.5375)){
 sigma_t_final = 0.;
 sigma_l_final = 0.;
 sigma_c2f_final = 0.;
@@ -604,7 +602,7 @@ sigma_total = sigma_total + eps_l*sigma_l_final;
 sigma_total = sigma_total + eps_t*(sigma_c2f_final*cos(2.*ph_hadr) + sigma_s2f_final*sin(2.*ph_hadr));
 sigma_total = sigma_total + sqrt(2.*eps_l*(eps_t+1))*(sigma_cf_final*cos(ph_hadr) + sigma_sf_final*sin(ph_hadr));
 
-if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan\n";
+if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<<" "<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan\n";
 
 
 //Adding additional rad corr weight factor, if needed
