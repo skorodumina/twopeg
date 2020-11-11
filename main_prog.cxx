@@ -183,8 +183,6 @@ inp_couts(E_beam);
 read_xsect_files();
 //Reading fit parameterms, which are needed for cross section extrapolation
 read_fit_param_files();
-//Defining some histograms
-hist_def(E_beam);   
      
 //Reasonably changing max&min limits of kinematical variables if needed
 cout << "___________________________________________\n\n";
@@ -220,6 +218,9 @@ if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min) {
 W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min);
 cout << "Maximum W  has been changed to " << W_max << "\n";
 };
+
+//Defining some histograms
+hist_def(E_beam); 
   
 //Defining the 4-vectors of the initial particles (e and p)
 P4_Pini.SetXYZT(0.,0.,0.,MP); 
