@@ -195,16 +195,17 @@ cout << "Minimum W  has been changed to " << W_min << "\n";
 if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min)) {
 W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min));
 };
-    
+   
 Q2lim1 = 2*E_beam*sin(Theta_min*M_PI/180./2.)*sin(Theta_min*M_PI/180./2.);
 Q2lim1 = Q2lim1*(2*E_beam*MP-W_max*W_max+MP*MP);
 Q2lim1 = Q2lim1/(MP+2*E_beam*sin(Theta_min*M_PI/180./2.)*sin(Theta_min*M_PI/180./2.));
-    
-if (Q2_min < Q2lim1) {
+if (Q2lim1 <= 0.00005) Q2lim1 = 0.00005;
+
+if ((Q2_min < Q2lim1)) {
 Q2_min = Q2lim1;
 cout << "Minimum Q2 has been changed to " << Q2_min << "\n";
 };
-    
+  
 Q2lim2 = 2*E_beam*sin(Theta_max*M_PI/180./2.)*sin(Theta_max*M_PI/180./2.);
 Q2lim2 = Q2lim2*(2*E_beam*MP-W_min*W_min+MP*MP);
 Q2lim2 = Q2lim2/(MP+2*E_beam*sin(Theta_max*M_PI/180./2.)*sin(Theta_max*M_PI/180./2.));
@@ -214,8 +215,13 @@ Q2_max = Q2lim2;
 cout << "Maximum Q2 has been changed to " << Q2_max << "\n";
 };
    
-if (W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min) {
+if ((W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min)&&(W_max <= 4.5375)) {
 W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min);
+cout << "Maximum W  has been changed to " << W_max << "\n";
+};
+
+if (W_max > 4.5375) {
+W_max = 4.5375;
 cout << "Maximum W  has been changed to " << W_max << "\n";
 };
 
