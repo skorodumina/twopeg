@@ -258,8 +258,9 @@ cout <<"\n";
 
  cout << "____________EVENT GENERATION:______________\n\n";
  
-if (flag_seed == 0) srand (time(NULL));
-if (flag_seed == 1) srand (seed);
+if (flag_seed == 0) seed = time(NULL);
+srand (seed);
+cout << "RandomSeedActuallyUsed: " << seed << endl;       
        
  TRandom3 ph_e_rndm(UInt_t(((float) rand() / (float)(RAND_MAX))*4000000000.));
  TRandom3 th_hadr_rndm(UInt_t(((float) rand() / (float)(RAND_MAX))*4000000000.));
