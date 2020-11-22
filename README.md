@@ -1,4 +1,6 @@
-Generator is exclusive and electroproduction (but at low Q2 it uses photoproduction data as a limiting point). It works for all Q2 starting from very small (0.0005 GeV^2) and W from the threshold to 4.5 GeV.
+TWOPEG is an event generator for the pi+pi- electroproduction off protons.
+
+The generator is exclusive and electroproduction (but at low Q2 it uses photoproduction data as a limiting point). It works for all Q2 starting from very small (0.0005 GeV^2) and W from the threshold to 4.5 GeV.
 
 The generator performs weighted event generation: first, it generates phase space (flat) distributions and then for each event multidimensional cross section is applied as a weight (see CLAS12-NOTE-2017-001). 
 
