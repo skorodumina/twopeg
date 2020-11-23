@@ -22,13 +22,13 @@ usage:
 	@echo "  make nobos"
 
 
-bos: setcxx twopeg_$(BOS).exe
+bos: setcxx twopeg_$(BOS)
 setcxx: 
 	rm -f *.o
 	rm -f *Dict.*
 	rm -f G__*
 	$(eval CXX = $(CXX_BOS))
-twopeg_$(BOS).exe: $(OBJS)
+twopeg_$(BOS): $(OBJS)
 	$(CXX) -g -o $@ $^ -L/usr/lib64 -L/u/home/gleb/lib/LinuxRHFC8 -lpid -ltag -llac -lseb -lst -lclasutil -lsc -lc_bos_io -ldc -lec -lcc -ltrk -ldc -lc_bos_io -lsc -lmapmanager -lfputil -lfpack -lrecutl -lonline_dummy -lc_cern -lclasutil -lbos -lfpack -lbankdefs -L/u/home/gleb/cern/2005/lib -lpacklib -lkernlib -lnsl -lgfortran -lmathlib -lpacklib -lkernlib -lpawlib $(ROOTGLIBS)  -lEG 
 %.o: %.cxx
 	$(CXX) -g -c $(ROOTINCLUDE) -c $<  -o $@
