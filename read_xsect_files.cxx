@@ -38,7 +38,7 @@ string file_names_rip3[10];
 string file_names_int[27];
 
 
-Float_t Xsect_int,cross_sect,cross_sect_t,cross_sect_l,eps_l_rip2;
+Float_t eps_l_rip2;
 Short_t wbin, q2bin;
 
 
