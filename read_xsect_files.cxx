@@ -38,7 +38,6 @@ string file_names_rip3[10];
 string file_names_int[27];
 
 
-Float_t eps_l_rip2;
 Short_t wbin, q2bin;
 
 
