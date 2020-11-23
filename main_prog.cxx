@@ -77,7 +77,7 @@
      return x*x*y+x*y*y+z*z*u+z*u*u+v*v*w+v*w*w+x*z*w+x*u*v+y*z*v+y*u*w-x*y*(z+u+v+w)-z*u*(x+y+v+w)-v*w*(x+y+z+u);
      };
 
-//This is the function that peprformes generation. It is declared here and executes below.   
+//This is the function that performs the generation. It is declared here and executes below.   
 void generate(Int_t argc, char *argv[]);
 
 
@@ -96,7 +96,7 @@ return 0;
 };
 
 
-//This is the function that peprformes generation.
+//This is the function that performs the generation.
 void generate(Int_t argc, char *argv[]) {
 
 global();
