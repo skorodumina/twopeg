@@ -272,7 +272,6 @@ input.close();
 
 
 
-
 //Define theta, alpha and Q2 arrays for Ripani
 
 THETA_ARR[0] = 0.;
@@ -294,8 +293,6 @@ Q2_ARR[0] = 0.65;
 Q2_ARR[1] = 0.95;
 Q2_ARR[2] = 1.30;
 
-
-//Float_t dtheta = (THETA_ARR[5] - THETA_ARR[0])/5.;
 
 
 cout<<"Reading Ripani   cross sections \n";
@@ -4746,7 +4743,6 @@ SIGMA_ARR_phot_gt_3[wbin][10][is12-1][itheta-1][ialpha-1] = 1.11*SIGMA_ARR_phot_
 };//end lop w.gt.3 - i
 
 
- return;
  
 };
 
