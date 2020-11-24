@@ -599,7 +599,7 @@ eps_l = Q2*eps_t/nu_g/nu_g;
 
 sigma_total =0.;
 
-if ((isnan(eps_l))||(isnan(eps_t))) cout << eps_l<< " "<< eps_t<<" eps in nan\n";
+if ((isnan(eps_l))||(isnan(eps_t))) cout << eps_l<< " "<< eps_t<<" eps in nan!\n";
 
 if  (!(eps_l>0.)&&!(eps_l<0)) eps_l = 0.;
 if  (!(eps_t>0.)&&!(eps_t<0)) eps_t = 0.;
@@ -610,13 +610,10 @@ sigma_total = sigma_total + eps_l*sigma_l_final;
 sigma_total = sigma_total + eps_t*(sigma_c2f_final*cos(2.*ph_hadr) + sigma_s2f_final*sin(2.*ph_hadr));
 sigma_total = sigma_total + sqrt(2.*eps_l*(eps_t+1))*(sigma_cf_final*cos(ph_hadr) + sigma_sf_final*sin(ph_hadr));
 
-if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<<" "<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan\n";
-
-
 //Adding additional rad corr weight factor, if needed
 if ((flag_radmod == 1)||(flag_radmod == 2)) {
 sigma_total = sigma_total*cr_rad_fact;
-if ((isnan(sigma_total))||(isnan(cr_rad_fact))) cout<< sigma_total<<" "<<cr_rad_fact<<" weight rad eff is nan\n";
+if (isnan(cr_rad_fact)) cout<< sigma_total<<" "<<cr_rad_fact<<" rad corr factor is nan!\n";
 };
 
 
@@ -647,6 +644,8 @@ V_flux = V_flux*W*(W*W-MP*MP);
 
 sigma_total = sigma_total*V_flux;    
 };
+
+if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<<" "<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan!\n";
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%!III. OBTAINING THE FINAL PARTICLE FOUR-MOMENTA IN THE LAB FRAME!%%%%%%%
