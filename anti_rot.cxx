@@ -212,8 +212,4 @@ P3_G.SetTheta(acos((Q2+2.*E_beam*E_gamma_lab)/2./E_beam/(sqrt(Q2+E_gamma_lab*E_g
  
  //cout <<"qqq1 "<< P4_3[0]<< " " << P4_3[1]<< " " <<P4_3[2]<< " " <<P4_3[3]<< "\n ";
  
-
-    
- return;
- 
  };
