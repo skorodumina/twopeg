@@ -641,9 +641,10 @@ V_flux = V_flux*W*(W*W-MP*MP);
 sigma_total = sigma_total*V_flux;    
 };
 
-if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<<" "<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan!\n";
+if ((isnan(sigma_total))||(isnan(V_flux))) cout << "Sigma = "<< sigma_total << ", Flux = "<< V_flux <<", W_old =  "<< W_old<< ", W =  "<<W<<", Q2 =  "<<Q2<<  ", Weight is nan!\n";
 
-if (!(sigma_total>0.)&&!(sigma_total<0.)&&!(isnan(sigma_total))&&(W<=4.5375)) cout <<"Sigma = "<< sigma_total <<", RCfactor =  "<<cr_rad_fact<<", Flux = "<<V_flux<<", W = "<< W<<", Q2 = "<<Q2<<  ", Zero cross section!\n";
+
+if (!(sigma_total>0.)&&!(sigma_total<0.)&&!(isnan(sigma_total))&&(W_old<=4.5375)) cout <<"Sigma = "<< sigma_total <<", W_old =  "<< W_old<< ", W =  "<<W<<", Q2 =  "<<Q2<<  ", Zero cross section!\n";
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%!III. OBTAINING THE FINAL PARTICLE FOUR-MOMENTA IN THE LAB FRAME!%%%%%%%
