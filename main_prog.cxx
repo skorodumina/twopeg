@@ -215,15 +215,11 @@ Q2_max = Q2lim2;
 cout << "Maximum Q2 has been changed to " << Q2_max << "\n";
 };
    
-if ((W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min)&&(W_max <= 4.5375)) {
+if ((W_max*W_max > MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min)) {
 W_max = sqrt(MP*MP +2.*MP*(E_beam - E_eprime_min) -Q2_min);
 cout << "Maximum W  has been changed to " << W_max << "\n";
 };
 
-if (W_max > 4.5375) {
-W_max = 4.5375;
-cout << "Maximum W  has been changed to " << W_max << "\n";
-};
 
 //Defining some histograms
 hist_def(E_beam); 
@@ -647,7 +643,7 @@ sigma_total = sigma_total*V_flux;
 
 if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<<" "<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan!\n";
 
-if (!(sigma_total>0.)&&!(sigma_total<0.)&&!(isnan(sigma_total))) cout << sigma_total <<" "<<cr_rad_fact<<" "<<V_flux<<" "<< W_old<< " "<<W_ferm<<" "<<W<<" "<<Q2_old<<" "<<Q2<<  " Zero cross section!\n";
+if (!(sigma_total>0.)&&!(sigma_total<0.)&&!(isnan(sigma_total))&&(W<=4.5375)) cout <<"Sigma = "<< sigma_total <<", RCfactor =  "<<cr_rad_fact<<", Flux = "<<V_flux<<", W = "<< W<<", Q2 = "<<Q2<<  ", Zero cross section!\n";
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%!III. OBTAINING THE FINAL PARTICLE FOUR-MOMENTA IN THE LAB FRAME!%%%%%%%
