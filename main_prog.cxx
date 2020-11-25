@@ -647,6 +647,8 @@ sigma_total = sigma_total*V_flux;
 
 if ((isnan(sigma_total))||(isnan(V_flux))) cout<<W_old<< " "<<W<<" "<<Q2_old<< " "<< Q2<<" "<< sigma_total<<" "<<sigma_t_final<< " "<< sigma_l_final<<" "<< sigma_c2f_final<< " "<< eps_l<<" weight is nan!\n";
 
+if (!(sigma_total>0.)&&!(sigma_total<0.)&&!(isnan(sigma_total))) cout << sigma_total <<" "<<cr_rad_fact<<" "<<V_flux<<" "<< W_old<< " "<<W_ferm<<" "<<W<<" "<<Q2_old<<" "<<Q2<<  " Zero cross section!\n";
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 //%%%%%%%!III. OBTAINING THE FINAL PARTICLE FOUR-MOMENTA IN THE LAB FRAME!%%%%%%%
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
