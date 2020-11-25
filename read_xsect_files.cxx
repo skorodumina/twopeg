@@ -4541,10 +4541,11 @@ if (wbin==2) SIGMA_ARR_GOL2[wbin][is23-1][is12-1][5][ialpha-1] = SIGMA_ARR_GOL2[
 
 
 
+Float_t a[15] = {0.7, 0.6,0.55,0.54,0.53,0.52,0.51,0.5,0.4,0.3,0.3,0.3,0.3,0.2,0.2};
+Float_t b[15] = {7, 6, 5.5, 5.4, 5.3, 2.5, 2., 1.7, 1.55, 1.45, 1.3, 1.2, 1.1, 1.05, 1.05};
 
 for (Short_t i=0; i<=14; i++) {
 wbin = i;
-
 
  W_ARR_gt_3[i] = 3.1375 + 0.1*i;
  
@@ -4596,44 +4597,55 @@ for (Int_t ialpha = 1; ialpha <=6; ialpha++) {
 
 SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.5*SIGMA_ARR_RIP3[j][9][is23-1][is12-1][itheta-1][ialpha-1]/(S12_ARR_RIP3[15][9]-S12_ARR_RIP3[0][9])/(S23_ARR_RIP3[15][9]-S23_ARR_RIP3[0][9])*(S12_ARR_gt_3[15][wbin]-S12_ARR_gt_3[0][wbin])*(S23_ARR_gt_3[15][wbin]-S23_ARR_gt_3[0][wbin]);
 
+if (!(SIGMA_ARR_RIP3[j][9][is23-1][is12-1][itheta-1][ialpha-1] > 0.)&&!(SIGMA_ARR_RIP3[j][9][is23-1][is12-1][itheta-1][ialpha-1] < 0.)) {
 
-if (wbin==0) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.7*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==1) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.65*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==2) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.63*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==3) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.6*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==4) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.58*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==5) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.57*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==6) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.05*1.05*0.6*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==7) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.05*1.05*0.6*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==8) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.05*1.05*0.59*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==9) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.05*1.05*0.58*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==10) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.05*1.05*0.57*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==11) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.2*0.56*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==12) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.2*0.54*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==13) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.2*0.52*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==14) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.2*0.5*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 1.5*a[wbin]/(S12_ARR_RIP3[15][9]-S12_ARR_RIP3[0][9])/(S23_ARR_RIP3[15][9]-S23_ARR_RIP3[0][9])*(S12_ARR_gt_3[15][wbin]-S12_ARR_gt_3[0][wbin])*(S23_ARR_gt_3[15][wbin]-S23_ARR_gt_3[0][wbin]);
+};
+
+
+
+if (wbin==0) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.94*0.7*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==1) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.93*0.65*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==2) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.92*0.63*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==3) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.91*0.6*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==4) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.90*0.58*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==5) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.89*0.57*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==6) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.88*1.05*1.05*0.6*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==7) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.87*1.05*1.05*0.6*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==8) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.86*1.05*1.05*0.59*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==9) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*1.05*1.05*0.58*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==10) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.84*1.05*1.05*0.57*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==11) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.83*1.2*0.56*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==12) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.80*1.2*0.54*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==13) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.80*1.2*0.52*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==14) SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.82*1.2*0.5*SIGMA_ARR_gt_3[j][wbin][is23-1][is12-1][itheta-1][ialpha-1];
 
 
 
 
 SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = SIGMA_ARR_GOL2[9][is23-1][is12-1][itheta-1][ialpha-1]/(S12_ARR_RIP3[15][9]-S12_ARR_RIP3[0][9])/(S23_ARR_RIP3[15][9]-S23_ARR_RIP3[0][9])*(S12_ARR_gt_3[15][wbin]-S12_ARR_gt_3[0][wbin])*(S23_ARR_gt_3[15][wbin]-S23_ARR_gt_3[0][wbin]);
 
+if (!(SIGMA_ARR_GOL2[9][is23-1][is12-1][itheta-1][ialpha-1] > 0.)&&!(SIGMA_ARR_GOL2[9][is23-1][is12-1][itheta-1][ialpha-1] < 0.)){
 
-if (wbin==0) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.6*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==1) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.56*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==2) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.52*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==3) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.48*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==4) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.46*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==5) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.44*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==6) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.47*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==7) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] =0.46*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==8) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] =0.43*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==9) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] =0.41*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==10) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.37*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==11) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.37*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==12) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] =0.34*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==13) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.32*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
-if (wbin==14) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.31*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = b[wbin]/(S12_ARR_RIP3[15][9]-S12_ARR_RIP3[0][9])/(S23_ARR_RIP3[15][9]-S23_ARR_RIP3[0][9])*(S12_ARR_gt_3[15][wbin]-S12_ARR_gt_3[0][wbin])*(S23_ARR_gt_3[15][wbin]-S23_ARR_gt_3[0][wbin]);
+};
+
+
+if (wbin==0) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.95*0.6*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==1) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.91*0.56*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==2) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.88*0.52*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==3) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.86*0.48*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==4) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.84*0.46*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==5) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.88*0.44*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==6) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.86*0.47*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==7) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*0.46*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==8) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*0.43*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==9) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*0.41*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==10) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*0.37*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==11) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*0.37*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==12) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.85*0.34*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==13) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.84*0.32*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
+if (wbin==14) SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1] = 0.83*0.31*SIGMA_ARR_phot_gt_3[wbin][is23-1][is12-1][itheta-1][ialpha-1];
 
 
 

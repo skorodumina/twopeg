@@ -284,7 +284,7 @@ h_Q2vsW->Fill(W_old,Q2_old,sigma_total);
 h_Q2vsW2->Fill(W_old,Q2_old,1.);
 
 h_nu->Fill((W*W+Q2-MP*MP)/2./MP,1.);
-h_dalitz->Fill(sqrt(s12),sqrt(s23),1.);
+h_dalitz->Fill(sqrt(s12),sqrt(s23),sigma_total);
   
 h_0_miss->Fill(P4_0_miss.Mag2(),sigma_total);
 h_0_miss_2->Fill(P4_0_miss_2.Mag2(),sigma_total);
