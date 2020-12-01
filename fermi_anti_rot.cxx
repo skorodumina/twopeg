@@ -92,9 +92,9 @@ TLorentzVector P4_Eini_Lab;
 P4_Eini_Lab.SetXYZT(0.,0.,E_beam,E_beam); 
 
  
- if ((fabs(P4_E_prime_qLab[0]-P4_E_prime_Lab[0])>0.0001)||(fabs(P4_E_prime_qLab[1]-P4_E_prime_Lab[1])>0.0001)||(fabs(P4_E_prime_qLab[2]-P4_E_prime_Lab[2])>0.0001)||(fabs(P4_E_prime_qLab[2]-P4_E_prime_Lab[2])>0.0001))  cout << "ALARM! Wrong Lab-->quasiLab-->Lab momenta transformation! \n";
+ if ((fabs(P4_E_prime_qLab[0]-P4_E_prime_Lab[0])>0.0001)||(fabs(P4_E_prime_qLab[1]-P4_E_prime_Lab[1])>0.0001)||(fabs(P4_E_prime_qLab[2]-P4_E_prime_Lab[2])>0.001)||(fabs(P4_E_prime_qLab[3]-P4_E_prime_Lab[3])>0.001))  cout << "ALARM! Wrong Lab-->quasiLab-->Lab momenta transformation! \n";
 
- if ((fabs(P4_Eini_qLab[0]-P4_Eini_Lab[0])>0.0001)||(fabs(P4_Eini_qLab[1]-P4_Eini_Lab[1])>0.0001)||(fabs(P4_Eini_qLab[2]-P4_Eini_Lab[2])>0.0001)||(fabs(P4_Eini_qLab[2]-P4_Eini_Lab[2])>0.0001)) cout << "ALARM! Wrong Lab-->quasiLab-->Lab momenta transformation! \n"; 
+ if ((fabs(P4_Eini_qLab[0]-P4_Eini_Lab[0])>0.0001)||(fabs(P4_Eini_qLab[1]-P4_Eini_Lab[1])>0.0001)||(fabs(P4_Eini_qLab[2]-P4_Eini_Lab[2])>0.001)||(fabs(P4_Eini_qLab[3]-P4_Eini_Lab[3])>0.001)) cout << "ALARM! Wrong Lab-->quasiLab-->Lab momenta transformation! \n"; 
  
  
   
