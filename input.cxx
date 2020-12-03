@@ -619,26 +619,26 @@ cout <<"___________________________________________\n\n";
      
 //------------------
 void cmdl_help(){
-cout << "	option 		default	comment\n";
+cout << "	option 		default		comment\n";
 cout << "GENERAL:\n";
 cout <<"	--seed		n/a   	Random seed, by default taken from time(NULL) \n";
 cout <<"	--trig		10000 	Number of events to be generated \n";
 
 cout << "KINEMATICS:\n";
-cout <<"	--ebeam		10.6    	Beam energy (GeV)\n";
+cout <<"	--ebeam		10.6    Beam energy (GeV)\n";
 cout <<"	--wmin		1.4    	Wmin   (GeV)\n";
 cout <<"	--wmax		2.3   	Wmax   (GeV)\n";
 cout <<"	--q2min		0.05 	Q2min  (GeV^2)\n";
 cout <<"	--q2max		3.5   	Q2max  (GeV^2)\n";
-cout <<"	--thmin		1.   	Theta  min of scattered electron (deg)\n";
+cout <<"	--thmin		1.0   	Theta  min of scattered electron (deg)\n";
 cout <<"	--thmax		50.   	Theta  max of scattered electron (deg)\n";
 cout <<"	--emin		0.1   	Energy min of scattered electron (GeV)\n";
 
 
 cout << "VERTEX:\n";
 cout <<"	--trad		0.6    	Target radius  (cm)\n";
-cout <<"	--tlen		2.     	Target length  (cm)\n";
-cout <<"	--toff		0.     	Target offset  (cm)\n";
+cout <<"	--tlen		2.0    	Target length  (cm)\n";
+cout <<"	--toff		0.0    	Target offset  (cm)\n";
 
 cout << "FOR RAD MODE:\n";
 cout <<"	--tden		0.071	Target density   (g/cm^3)\n";
@@ -672,8 +672,8 @@ cout <<"                                   		  1 - yes (electroproduction)\n";
 
 
 cout << "OUTPUT:\n";
-cout <<"	--bosname 	out.bos	BOS  output name (n/a for 'make nobos')  \n";
-cout <<"	--lundname 	twopeg.dat LUND output name	    \n";
+cout <<"	--bosname 	out.bos		BOS  output name (n/a for 'make nobos')  \n";
+cout <<"	--lundname 	twopeg.dat 	LUND output name	    \n";
 };     
      
      
