@@ -20,6 +20,8 @@ void input_stream(Float_t &E_beam) {
 
 cout << endl;
 cout << "The cin stream input is used\n";
+cout << "Use './twopeg < file_name', to get parameters from the file\n";
+cout << "See 'inp1' for details\n";
 cout << endl;
  
 string qqq;
