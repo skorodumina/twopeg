@@ -41,7 +41,7 @@ radcorr.cxx - performs radiative effects.
 There are two compiling options: 
 
 1) "make nobos" - to compile without BOS libraries, no output in BOS format is possible in this case (suitable for CLAS12),
-2) "make bos" - to compile with BOS libraries (suitable for CLAS). BOS output can be created according to the flag in the input file. Some of the libraries are located at "/u/home/gleb/lib/LinuxRHFC8" and sooner or later they will become irrelevant.
+2) "make bos" - to compile with BOS libraries (suitable for CLAS). BOS output can be created according to the flag in the input file. Some of the libraries are located at "/u/home/gleb/lib/LinuxRHFC8" and sooner or later they will become irrelevant. ("make bos" works for gcc 5.3.0 and ROOT 5.34.36)
 
 It should compile on ifarms.
 
