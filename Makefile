@@ -29,7 +29,7 @@ setcxx:
 	rm -f G__*
 	$(eval CXX = $(CXX_BOS))
 twopeg_$(BOS): $(OBJS)
-	$(CXX) -g -o $@ $^ -L/usr/lib64 -L/u/home/gleb/lib/LinuxRHFC8 -L$(CLAS6LIB) -lpid -ltag -llac -lseb -lst -lclasutil  -lec -lcc -ltrk -ldc -lc_bos_io -lsc -lmapmanager -lfputil -lfpack -lrecutl -lonline_dummy -lc_cern -lbos -lbankdefs -L$(CERNLIB) -lnsl -lgfortran -lmathlib -lpacklib -lkernlib -lpawlib $(ROOTGLIBS)  -lEG 
+	$(CXX) -g -o $@ $^ -L/u/home/gleb/lib/LinuxRHFC8 -L$(CLAS6LIB) -lpid -ltag -llac -lseb -lst -lclasutil  -lec -lcc -ltrk -ldc -lc_bos_io -lsc -lmapmanager -lfputil -lfpack -lrecutl -lonline_dummy -lc_cern -lbos -lbankdefs -L$(CERNLIB) -lnsl -lgfortran -lmathlib -lpacklib -lkernlib -lpawlib $(ROOTGLIBS)  -lEG 
 %.o: %.cxx
 	$(CXX) -g -c $(ROOTINCLUDE) -c $<  -o $@
 	
@@ -40,7 +40,7 @@ remove:
 	rm -f *Dict.*
 	rm -f G__*	
 twopeg$(NOBOS): $(OBJS) 
-	$(CXX) -g -o $@ $^ -L/usr/lib64    $(ROOTGLIBS)  -lEG
+	$(CXX) -g -o $@ $^ $(ROOTGLIBS)  -lEG
 
 
 
@@ -52,5 +52,5 @@ clean:
 	rm -f G__*
 	rm -f interpol/*.o 
 	rm -f get_xsect/*.o 
-	rm -f twopeg twopeg_bos.exe
+	rm -f twopeg twopeg_bos
 	
