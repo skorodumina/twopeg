@@ -615,7 +615,7 @@ if (!(cr_rad_fact>0.)&&!(cr_rad_fact<0.)&&!(isnan(cr_rad_fact))) cout << "RadCor
 
 
 //multiply sigma_total by virtual photon flux
-if ((flag_flux == 1)&&(flag_fermi == 0)){
+if ((flag_flux == 1)&&((flag_fermi == 0)||((flag_fermi == 1)&&!(flag_radmod == 0)))){
 nu_g = (W_old*W_old + Q2_old - MP*MP)/2./MP;
 theta_el = acos(1.- Q2_old/E_beam/(E_beam - nu_g)/2.);
 eps_t = 1./(1.+ 2.*(1. + nu_g*nu_g/Q2_old)*tan(theta_el/2.)*tan(theta_el/2.));
@@ -629,7 +629,7 @@ sigma_total = sigma_total*V_flux;
 };
 
 
-if ((flag_flux == 1)&&(flag_fermi == 1)){
+if ((flag_flux == 1)&&(flag_fermi == 1)&&(flag_radmod == 0)){
 nu_g = (W*W + Q2 - MP*MP)/2./MP;
 theta_el = acos(1.- Q2/E_beam_fermi/(E_beam_fermi - nu_g)/2.);
 eps_t = 1./(1.+ 2.*(1. + nu_g*nu_g/Q2)*tan(theta_el/2.)*tan(theta_el/2.));
