@@ -1,7 +1,7 @@
 BOS = bos
 NOBOS = 
-CXX           = g++ -O2 -Wno-write-strings -Wno-pragmas -I$(CLAS_BUILD)/packages/include -I$(PWD)/interpol -I$(PWD)/get_xsect -I$(PWD)
-CXX_BOS       = g++ -DBOS -O2 -Wno-write-strings -Wno-pragmas -I$(CLAS_BUILD)/packages/include -I$(PWD)/interpol -I$(PWD)/get_xsect -I$(PWD)
+CXX           = /apps/gcc/6.4.0/bin/g++ -O2 -Wno-write-strings -Wno-pragmas -I$(CLAS_BUILD)/packages/include -I$(PWD)/interpol -I$(PWD)/get_xsect -I$(PWD)
+CXX_BOS       = /apps/gcc/6.4.0/bin/g++ -DBOS -O2 -Wno-write-strings -Wno-pragmas -I$(CLAS_BUILD)/packages/include -I$(PWD)/interpol -I$(PWD)/get_xsect -I$(PWD)
 ObjSuf        = o
 ObjSuf_BOS        = o
 SrcSuf        = cxx
@@ -29,7 +29,7 @@ setcxx:
 	rm -f G__*
 	$(eval CXX = $(CXX_BOS))
 twopeg_$(BOS): $(OBJS)
-	$(CXX) -g -o $@ $^ -L/u/home/gleb/lib/LinuxRHFC8 -L$(CLAS6LIB) -lc_bos_io -lmapmanager -lfputil -lfpack -lbos -lbankdefs -L$(CERNLIB) -lgfortran -lmathlib -lpacklib -lkernlib -lpawlib $(ROOTGLIBS) -lEG 
+	$(CXX) -g -o $@ $^ -L/u/home/gleb/lib/LinuxRHFC8 -L$(CLAS6LIB) -lc_bos_io -lmapmanager -lfputil -lfpack -lbos -lbankdefs -L$(CERNLIB) -lgfortran -lpacklib $(ROOTGLIBS) -lEG 
 %.o: %.cxx
 	$(CXX) -g -c $(ROOTINCLUDE) -c $<  -o $@
 	
