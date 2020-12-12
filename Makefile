@@ -29,7 +29,7 @@ setcxx:
 	rm -f G__*
 	$(eval CXX = $(CXX_BOS))
 twopeg_$(BOS): $(OBJS)
-	$(CXX) -g -o $@ $^ -L/u/home/gleb/lib/LinuxRHFC8 -L$(CLAS6LIB) -lc_bos_io -lmapmanager -lfputil -lfpack -lbos -lbankdefs -L$(CERNLIB) -lgfortran -lpacklib $(ROOTGLIBS) -lEG 
+	$(CXX) -g -o $@ $^ -lgfortran -L/u/home/skorodum/lib/bos/bos_gcc920 -L$(CLAS6LIB) -lc_bos_io -lfputil -lbos -lmapmanager -lbankdefs -lfpack -L$(CERNLIB) -lpacklib $(ROOTGLIBS) -lEG 
 %.o: %.cxx
 	$(CXX) -g -c $(ROOTINCLUDE) -c $<  -o $@
 	
