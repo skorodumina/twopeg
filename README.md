@@ -41,7 +41,7 @@ radcorr.cxx - performs radiative effects.
 There are two compiling options: 
 
 1) "make nobos" - to compile without BOS libraries, no output in BOS format is possible in this case (suitable for CLAS12),
-2) "make bos" - to compile with BOS libraries (suitable for CLAS). BOS output can be created according to the flag in the input file. Some of the libraries (-lc_bos_io -lmapmanager -lfputil -lfpack -lbos -lbankdefs) are taken from "/u/home/skorodum/lib/bos/bos_gcc920". These libraries were compiled for gcc 9.2.0, and so may not match the older compliper versions. For gcc 5.3.0 the libraries can be taken from "/u/home/skorodum/lib/bos/bos_gcc530",the path in the Makefifle should be then changed accordingly.
+2) "make bos" - to compile with BOS libraries (suitable for CLAS). BOS output can be created according to the flag in the input file. Some of the libraries (-lc_bos_io -lmapmanager -lfputil -lfpack -lbos -lbankdefs) are taken from "/u/home/skorodum/lib/bos/bos_gcc920". These libraries were compiled for gcc 9.2.0, and so may not match the older compiler versions. For gcc 5.3.0 the libraries can be taken from "/u/home/skorodum/lib/bos/bos_gcc530",the path in the Makefifle should be then changed accordingly.
 
 It should compile on ifarms.
 
