@@ -7,6 +7,15 @@ ObjSuf_BOS        = o
 SrcSuf        = cxx
 DllSuf        = so
 
+gcc_version = $(shell gcc --version | grep gcc | awk '{print substr($$3,1,1)}')
+
+ifeq ($(gcc_version), $(filter $(gcc_version),4 5 6))
+BOS_LIB :=  /u/home/skorodum/lib/bos/bos_gcc530
+else
+BOS_LIB :=  /u/home/skorodum/lib/bos/bos_gcc920
+endif
+
+
 ROOTCFLAGS   := $(shell root-config --cflags)
 ROOTLIBS     := $(shell root-config --libs)
 ROOTGLIBS    := $(shell root-config --glibs)
@@ -29,7 +38,7 @@ setcxx:
 	rm -f G__*
 	$(eval CXX = $(CXX_BOS))
 twopeg_$(BOS): $(OBJS)
-	$(CXX) -g -o $@ $^ -lgfortran -L/u/home/skorodum/lib/bos/bos_gcc920 -L$(CLAS6LIB) -lc_bos_io -lfputil -lbos -lmapmanager -lbankdefs -lfpack -L$(CERNLIB) -lpacklib $(ROOTGLIBS) -lEG 
+	$(CXX) -g -o $@ $^ -lgfortran -L$(BOS_LIB) -lc_bos_io -lfputil -lbos -lmapmanager -lbankdefs -lfpack -L$(CERNLIB) -lpacklib $(ROOTGLIBS) -lEG 
 %.o: %.cxx
 	$(CXX) -g -c $(ROOTINCLUDE) -c $<  -o $@
 	
