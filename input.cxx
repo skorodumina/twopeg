@@ -146,6 +146,7 @@ cout << "Input parameters are set to their default values"<< endl;
 cout << "Use './twopeg --help' for cmd line options"<< endl;
 cout << endl;
 
+Int_t Narg;
 Int_t n_trig = 0;
 Float_t var_f = 0.;
 Short_t var_sh = 0;
@@ -193,9 +194,14 @@ std::string end_str;
    flag_radmod = 0;	// Radiative mode 0 - no rad effects, 1 - rad eff with no straggling,  2 - rad eff with straggling
    flag_fermi = 0; 	//Fermi smearing: 0 - no, 1 - yes
    flag_flux = 1;	//Multiplication by virtual photon flux: 0 - no (virtual photoproduction), 1 - yes (electroproduction)
+
+var_str = argv[argc-1];
+if (!(var_str.substr(0,2) == "--")) Narg = argc;
+if   (var_str.substr(0,2) == "--")  Narg = argc - 1;
+var_str = "";
       
 //----General and kinematics-----   
-for (Short_t i=0;i<argc;i++){
+for (Short_t i=0;i<Narg;i++){
 arg = argv[i];
 
 if (arg=="--trig") {
@@ -294,7 +300,7 @@ end = "";
 
 //--------------Target--------------------------------
 if (argc > 3) cout << endl;  
-for (Short_t i=0;i<argc;i++){
+for (Short_t i=0;i<Narg;i++){
 arg = argv[i];
 
 if (arg=="--trad") {
@@ -361,7 +367,7 @@ var_sh = 0.;
 
 //--------Target windows------
 if (argc > 3) cout << endl;  
-for (Short_t i=0;i<argc;i++){
+for (Short_t i=0;i<Narg;i++){
 arg = argv[i];
 
 if (arg=="--twlen") {
@@ -453,7 +459,7 @@ var_sh = 0.;
 
 //-----Other (flags and outputs)-------
 if (argc > 3) cout << endl;  
-for (Short_t i=0;i<argc;i++){
+for (Short_t i=0;i<Narg;i++){
 arg = argv[i];
 
 #ifdef BOS
