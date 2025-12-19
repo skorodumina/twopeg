@@ -64,7 +64,7 @@ See also Iu. Skorodumina's wiki page: https://clasweb.jlab.org/wiki/index.php/TW
 
 --------------------------------------------------
 Below is the list of the command line arguments accepted by the generator.
-
+```
 option 		default		comment
 	
 GENERAL:
@@ -123,7 +123,7 @@ OUTPUT:
 
 --bosname 	out.bos		BOS  output name (n/a for 'make nobos')  
 --lundname 	twopeg.dat 	LUND output name
-
+```
 --------------------------------------------------
 Contact person: Iuliia Skorodumina (skorodum@jlab.org).
  
