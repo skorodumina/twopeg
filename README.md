@@ -110,7 +110,7 @@ FLAGS:
 
 --flagbos	0/1    	Output BOS file, 0 - no, (for 'make nobos' always 0)
                                 	 1 - MCTK, MCVX banks, (for 'make bos' 1 by default)
-					 	2 - PART bank
+                                	 2 - PART bank
 --flaglund	1    	Output LUND file, 0 - no, 1 - yes
 --flagrad	0    	Rad mode, 0 - no rad eff,
                               	  1 - rad eff without straggling,
