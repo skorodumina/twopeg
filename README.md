@@ -111,7 +111,10 @@ FLAGS:
 OUTPUT:
 	--bosname 	out.bos		BOS  output name (n/a for 'make nobos')  
 	--lundname 	twopeg.dat 	LUND output name
+<<<<<<< HEAD
+=======
 
+>>>>>>> e45e7a6a4be7ba934b69e8c7add70c380b894b6b
 --------------------------------------------------
 Contact person: Iuliia Skorodumina (skorodum@jlab.org).
  
