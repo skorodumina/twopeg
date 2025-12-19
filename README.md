@@ -66,6 +66,7 @@ See also Iu. Skorodumina's wiki page: https://clasweb.jlab.org/wiki/index.php/TW
 Below is the list of the command line arguments accepted by the generator.
 
 	option 		default		comment
+	
 GENERAL:
 	--seed		n/a   	Random seed, by default taken from time(NULL) 
 	--trig		10000 	Number of events to be generated 
