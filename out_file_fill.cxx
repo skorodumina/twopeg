@@ -206,7 +206,7 @@ cleanBanks( &bcs_ );
 //%%%%%%%%%II. FILLING LUND OUTPUT IF CREATED%%%%%%%%%%%%%%%%%%%      
 if (flag_lund == 1){   
    
-out_lund_stream <<"4  1.  1.  0  0  "<<i<< "  0  "<<std::fixed<<std::setprecision(6)<< W<< "  "<< Q2<< "  "<<sigma << "\n"; 
+out_lund_stream <<"4  1.  1.  0  0  "<<i<< "  0  "<<std::fixed<<std::setprecision(6)<< W<< "  "<< Q2<< "  "<< std::fixed<<std::setprecision(10)<<sigma << std::fixed<<std::setprecision(6) << "\n"; 
       
       //electron
        out_lund_stream <<" 1  -1.  1  11  0  0  "<<P4_E[0]<<"  ";

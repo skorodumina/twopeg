@@ -51,11 +51,11 @@ The generator supports two options for taking the input parameters:
 
 1) As a cin stream from a certain input file. To use this option run as "./twopeg < inp1", where "inp1" is in the same directory and contains input parameters with comments. 
 
-2) The command line input is also supported. The EG can then be run as "./twopeg a", where "a" is any charachter. The default values of input parameters are then used unless reset through the cmd line. For cmd line option and default values type "./twopeg --help".
+2) The command line input is also supported. The EG can then be run as "./twopeg a", where "a" is any charachter. The default values of input parameters are then used unless reset through the cmd line. For the cmd line options and default values type "./twopeg --help" or see the "cmd_line_arg" file available in the generator directory. Also see the list below.
 
 --------------------------------------------------
 
-The generator needs "dat" files with tabulated structure functions and fit parameters. They are located in the "data" subfolder inside the EG directory. If you move it, you need to define the environment variable "TWOPEG_DATA_DIR" that points to the new folder location (e.g. in csh use "setenv TWOPEG_DATA_DIR new_path/").
+The generator needs ".dat" files with tabulated structure functions and fit parameters. They are located in the "data" subfolder inside the EG directory. If you move it, you need to define the environment variable "TWOPEG_DATA_DIR" that points to the new folder location (e.g. in csh use "setenv TWOPEG_DATA_DIR new_path/").
 
 --------------------------------------------------
 
@@ -63,6 +63,55 @@ See more details in CLAS12-NOTE-2017-001 (arXiv:1703.08081) and CLAS12-NOTE-2017
 See also Iu. Skorodumina's wiki page: https://clasweb.jlab.org/wiki/index.php/TWOPEG_event_generator  
 
 --------------------------------------------------
+Below is the list of the command line arguments accepted by the generator.
 
-Contact persons: Iuliia Skorodumina (skorodum@jlab.org) and Gleb Fedotov (gleb@jlab.org)
+	option 		default		comment
+GENERAL:
+	--seed		n/a   	Random seed, by default taken from time(NULL) 
+	--trig		10000 	Number of events to be generated 
+KINEMATICS:
+	--ebeam		10.6    Beam energy (GeV)
+	--wmin		1.4    	Wmin   (GeV)
+	--wmax		2.3   	Wmax   (GeV)
+	--q2min		0.05 	Q2min  (GeV^2)
+	--q2max		3.5   	Q2max  (GeV^2)
+	--thmin		1.0   	Theta  min of scattered electron (deg)
+	--thmax		50.   	Theta  max of scattered electron (deg)
+	--emin		0.1   	Energy min of scattered electron (GeV)
+VERTEX:
+	--trad		0.6    	Target radius  (cm)
+	--tlen		2.0    	Target length  (cm)
+	--toff		0.0    	Target offset  (cm)
+FOR RAD MODE:
+	--tden		0.071	Target density   (g/cm^3)
+	--trdln		888.03	Target radlenth  (cm)
+	--tz		1    	Target Z	    
+	--ta		1    	Target A	    
+	--twlen		15.   	Target windows thickness (each)  (um)	   
+	--twflen	15.   	Target windows thickness (final) (um) 	   if diff from initial
+	--twden		2.699	Target windows density   (each)	 (g/cm^3)  
+	--twfden	2.699	Target windows density   (final) (g/cm^3)  if diff from initial
+	--twrdln	8.897	Target windows radlenth  (each)  (cm)      
+	--twfrdln	8.897	Target windows radlenth  (final) (cm)	   if diff from initial
+	--twz		13    	Target windows Z	 (each)  	  
+	--twfz		13   	Target windows Z	 (final) 	   if diff from initial
+	--twa		27    	Target windows A	 (each)  
+	--twfa		27    	Target windows A	 (final) 	   if diff from initial
+FLAGS:
+	--flagbos	0/1    	Output BOS file, 0 - no, (for 'make nobos' always 0)
+	                                      	 1 - MCTK, MCVX banks, (for 'make bos' 1 by default)
+	                                       	 2 - PART bank
+	--flaglund	1    	Output LUND file, 0 - no, 1 - yes
+	--flagrad	0    	Rad mode, 0 - no rad eff,
+                                   	  1 - rad eff without straggling,
+                                   	  2 - rad eff with    straggling
+	--flagfermi	0     	Fermi smearing, 0 - no, 1 - yes
+	--flagflux	1     	Multiply by Flux, 0 - no  (virtual photoproduction),
+                                   		  1 - yes (electroproduction)
+OUTPUT:
+	--bosname 	out.bos		BOS  output name (n/a for 'make nobos')  
+	--lundname 	twopeg.dat 	LUND output name
+
+--------------------------------------------------
+Contact person: Iuliia Skorodumina (skorodum@jlab.org).
  

@@ -1,0 +1,46 @@
+	option 		default		comment
+GENERAL:
+	--seed		n/a   	Random seed, by default taken from time(NULL) 
+	--trig		10000 	Number of events to be generated 
+KINEMATICS:
+	--ebeam		10.6    Beam energy (GeV)
+	--wmin		1.4    	Wmin   (GeV)
+	--wmax		2.3   	Wmax   (GeV)
+	--q2min		0.05 	Q2min  (GeV^2)
+	--q2max		3.5   	Q2max  (GeV^2)
+	--thmin		1.0   	Theta  min of scattered electron (deg)
+	--thmax		50.   	Theta  max of scattered electron (deg)
+	--emin		0.1   	Energy min of scattered electron (GeV)
+VERTEX:
+	--trad		0.6    	Target radius  (cm)
+	--tlen		2.0    	Target length  (cm)
+	--toff		0.0    	Target offset  (cm)
+FOR RAD MODE:
+	--tden		0.071	Target density   (g/cm^3)
+	--trdln		888.03	Target radlenth  (cm)
+	--tz		1    	Target Z	    
+	--ta		1    	Target A	    
+	--twlen		15.   	Target windows thickness (each)  (um)	   
+	--twflen	15.   	Target windows thickness (final) (um) 	   if diff from initial
+	--twden		2.699	Target windows density   (each)	 (g/cm^3)  
+	--twfden	2.699	Target windows density   (final) (g/cm^3)  if diff from initial
+	--twrdln	8.897	Target windows radlenth  (each)  (cm)      
+	--twfrdln	8.897	Target windows radlenth  (final) (cm)	   if diff from initial
+	--twz		13    	Target windows Z	 (each)  	  
+	--twfz		13   	Target windows Z	 (final) 	   if diff from initial
+	--twa		27    	Target windows A	 (each)  
+	--twfa		27    	Target windows A	 (final) 	   if diff from initial
+FLAGS:
+	--flagbos	0/1    	Output BOS file, 0 - no, (for 'make nobos' always 0)
+	                                      	 1 - MCTK, MCVX banks, (for 'make bos' 1 by default)
+	                                       	 2 - PART bank
+	--flaglund	1    	Output LUND file, 0 - no, 1 - yes
+	--flagrad	0    	Rad mode, 0 - no rad eff,
+                                   	  1 - rad eff without straggling,
+                                   	  2 - rad eff with    straggling
+	--flagfermi	0     	Fermi smearing, 0 - no, 1 - yes
+	--flagflux	1     	Multiply by Flux, 0 - no  (virtual photoproduction),
+                                   		  1 - yes (electroproduction)
+OUTPUT:
+	--bosname 	out.bos		BOS  output name (n/a for 'make nobos')  
+	--lundname 	twopeg.dat 	LUND output name	    
